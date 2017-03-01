@@ -15,8 +15,8 @@
    user: '{{ splunklab_user }}'
    state: present
    key: "{{ lookup('file', '{{ splunklab_user_pub_home_path }}') }}"
- tags:
-  - setauthkey
+  tags:
+   - setauthkey
 
 
 - name: add splunk user
