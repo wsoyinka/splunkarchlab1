@@ -78,7 +78,7 @@
   file:
    path: /root/.splunk
    state: directory
-   mode: 0777
+   mode: 0755
    owner: "{{ splunk_system_user }}"
    group: "{{ splunk_system_user }}"
   tags:
@@ -86,8 +86,8 @@
 
 - name:  change splunk admin password on searchhead and indexers
   become: yes
-  #become_user: "{{ splunk_system_user }}"
-  become_user: root
+  become_user: "{{ splunk_system_user }}"
+#  become_user: root
   command: "{{ splunk_path  }}/bin/splunk edit user admin -auth {{ splunk_admin }}:changeme -password {{ splunk_pass  }}"
   environment:
    SPLUNK_HOME: "{{ splunk_path  }}"
