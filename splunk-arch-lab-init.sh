@@ -1,5 +1,5 @@
 #!/bin/bash
-#### 
+####
 ####
 
 #set -o errexit
@@ -10,4 +10,9 @@ virtualenv  -p python2.7 splunkarchlab
 
 source splunkarchlab/bin/activate
 
+
+
 pip -q install ansible
+
+
+ansible-playbook site.yml --tag downloadufwget,installuf   -l  forwarders

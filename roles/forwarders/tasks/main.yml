@@ -58,3 +58,78 @@
    group: "{{ splunk_system_user }}"
   tags:
   - set_password
+
+- name: accept splunk license on forwarders
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  command: "{{ uf_path  }}/bin/splunk start --accept-license --answer-yes"
+  args:
+   creates: "{{ uf_path  }}/etc/users/splunk-system-user"
+  environment:
+   SPLUNK_HOME: "/opt/splunkforwarder"
+  tags: start_uf
+
+- name: setup splunk to start at boot on forwarders
+  become: yes
+#  become_user: "{{ splunk_system_user }}"
+  command: "{{ uf_path  }}/bin/splunk enable boot-start -user splunk --accept-license --answer-yes"
+  args:
+   creates: "{{ uf_path }}/etc/users/splunk-system-user"
+  environment:
+   SPLUNK_HOME: "/opt/splunkforwarder"
+  tags: start_uf_boot
+
+
+- name:  set deployment.conf from cli
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  #become_user: root
+  command: "{{ uf_path }}/bin/splunk set deploy-poll  {{ deployment_server_address }}:8089  -auth {{ splunk_admin }}:{{ splunk_pass  }}"
+  environment:
+   SPLUNK_HOME: "{{ uf_path }}"
+  tags: configure_uf_d_cli
+
+
+- name: stop splunk service
+  become: yes
+  command: "{{ uf_path  }}/bin/splunk stop"
+  environment:
+   SPLUNK_HOME: "{{ uf_path }}"
+  tags: stop_uf
+
+
+
+
+- name: template out outputs.conf
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  tags:
+   - configure_uf_o
+  template:
+    src: outputs.conf.j2
+    dest: "{{ uf_path }}/etc/system/local/outputs.conf"
+    owner: "{{ splunk_system_user }}"
+    group: "{{ splunk_system_user }}"
+
+- name: template out inputs.conf
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  tags:
+   - configure_uf_i
+  template:
+    src: inputs.conf.j2
+    dest: "{{ uf_path }}/etc/system/local/inputs.conf-test"
+    owner: "{{ splunk_system_user }}"
+    group: "{{ splunk_system_user }}"
+
+
+- name: template deploymentclient.conf
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  tags:
+   - configure_uf_d
+  template:
+    src: deploymentclient.conf.j2
+    dest: "{{ uf_path }}/etc/system/local/deploymentclient.conf"
+    owner: "{{ splunk_system_user }}"
+    group: "{{ splunk_system_user }}"
