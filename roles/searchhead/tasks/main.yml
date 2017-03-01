@@ -41,30 +41,21 @@
    - deluser
 
 
-- name: generate key on searchhead box
-  command: "curl -o {{ main_installer_dest  }} {{ main_installer_url }} "
-  # args:
-  #  creates: "{{ splunklab_user_key_home_path }}"
-  tags:
-   - downloadmaincurl
-
-
 - name: download installer for splunk
-  get_url:
-   url: '{{ main_installer_url }}'
-   dest: '{{ main_installer_dest  }}'
-   validate_certs: no
+  command: "wget -O {{ main_installer_dest  }} {{ main_installer_url }} "
   tags:
-   - downloadmain
+   - downloadmainwget
 
 
-- name: download installer for splunk
-  get_url:
-   url: '{{ main_installer_url }}'
-   dest: '{{ main_installer_dest  }}'
-   validate_certs: no
-  tags:
-   - downloadmain
+# - name: download installer for splunk
+#   get_url:
+#    url: '{{ main_installer_url }}'
+#    dest: '{{ main_installer_dest  }}'
+#    validate_certs: no
+#   tags:
+#    - downloadmain
+
+
 
 - name: install Main splunk binary
   become: yes

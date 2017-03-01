@@ -21,20 +21,25 @@
   tags:
    - deluser
 
-- name: download installer for universal forwarder
-  get_url:
-   url: '{{ uf_installer_url }}'
-   dest: '{{ uf_installer_dest  }}'
-   validate_certs: no
+- name: download installer for splunk
+  command: "wget -O {{ uf_installer_dest  }} {{ uf_installer_url }} "
   tags:
-   - downloaduf
+   - downloadufwget
+
+# - name: download installer for universal forwarder
+#   get_url:
+#    url: '{{ uf_installer_url }}'
+#    dest: '{{ uf_installer_dest  }}'
+#    validate_certs: no
+#   tags:
+#    - downloaduf
 
 - name: install UF splunk binary
   become: yes
   tags:
    - installuf
   unarchive:
-    src: "{{ uf_installer_dest  }}" 
+    src: "{{ uf_installer_dest  }}"
     dest: /opt/
     copy: no
     owner: "{{ splunk_system_user }}"
