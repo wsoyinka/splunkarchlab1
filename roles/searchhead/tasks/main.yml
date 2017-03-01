@@ -3,7 +3,7 @@
 
 
 - name: generate key on searchhead box
-  command: "ssh-keygen -t rsa -f '{{ splunklab_user_key_home_path}}' -N '' -C 'search_headkey' "
+  command: "ssh-keygen -t rsa -f '{{ splunklab_user_key_home_path}}' -N '' -C 'search_head_key' "
   args:
    creates: "{{ splunklab_user_key_home_path }}"
   tags:
