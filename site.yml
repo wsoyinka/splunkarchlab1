@@ -1,0 +1,27 @@
+- hosts: searchheads
+  connection: local
+  gather_facts: no
+  vars_files:
+   - ./env/vars.yml
+  roles:
+   - { role: searchhead, tags: [ "searchhead_role" ] }
+
+- hosts: forwarders
+  connection: smart
+  gather_facts: yes
+  vars:
+   SPLUNK_HOME: "/opt/splunkforwarder/"
+  vars_files:
+   - ./env/vars.yml
+  roles:
+   - { role: forwarders, tags: [ "forwarders_role" ] }
+   - { role: searchhead, tags: [ "forwarders_role" ] }
+
+- hosts: indexers
+  connection: smart
+  gather_facts: no
+  vars_files:
+   - ./env/vars.yml
+  roles:
+   - { role: indexers, tags: [ "indexers_role" ] }
+   - { role: searchhead, tags: [ "forwarders_role" ] }

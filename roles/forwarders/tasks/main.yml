@@ -1,2 +1,42 @@
 ---
 # tasks file for forwarders
+
+- name: add splunk user
+  become: yes
+  user:
+    name: "{{ uf_system_user }}"
+    comment: "Splunk service user"
+    createhome: no
+    system: yes
+  tags:
+   - createuser
+
+
+- name: del  splunk user
+  become: yes
+  user:
+   name: "{{ uf_system_user  }}"
+   remove: yes
+   state: absent
+  tags:
+   - deluser
+
+- name: download installer for universal forwarder
+  get_url:
+   url: '{{ uf_installer_url }}'
+   dest: '{{ uf_installer_dest  }}'
+   validate_certs: no
+  tags:
+   - downloaduf
+
+- name: install UF splunk binary
+  become: yes
+  tags:
+   - installuf
+  unarchive:
+    src: "{{ uf_installer_dest  }}" 
+    dest: /opt/
+    copy: no
+    owner: "{{ splunk_system_user }}"
+    group: "{{ splunk_system_user }}"
+    creates: "{{ splunkforwarder_path }}/bin/splunk"

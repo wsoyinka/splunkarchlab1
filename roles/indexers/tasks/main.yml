@@ -1,2 +1,93 @@
 ---
 # tasks file for indexers
+
+- name: Set authorized key from file
+  become: True
+  authorized_key:
+   user: '{{ splunklab_user }}'
+   state: present
+   key: "{{ lookup('file', '{{ splunklab_user_pub_home_path }}') }}"
+ tags:
+  - setauthkey
+
+
+- name: add splunk user
+  become: yes
+  user:
+   name: "{{ splunk_system_user }}"
+   comment: "Splunk service user"
+   createhome: no
+   system: yes
+  tags:
+   - createuser
+
+- name: del  splunk user
+  become: yes
+  user:
+   name: "{{ splunk_system_user  }}"
+   remove: yes
+   state: absent
+  tags:
+   - deluser
+
+- name: download installer for splunk
+  get_url:
+   url: '{{ main_installer_url }}'
+   dest: '{{ main_installer_dest  }}'
+   validate_certs: no
+  tags:
+   - downloadmain
+
+- name: install Main splunk binary
+  become: yes
+  tags:
+   - installmain
+  unarchive:
+    src: "{{ main_installer_dest  }}"
+    dest: /opt/
+    copy: no
+    owner: "{{ splunk_system_user }}"
+    group: "{{ splunk_system_user }}"
+    creates: "{{ splunk_path }}/bin/splunk"
+
+- name: accept splunk license on searchhead and indexers
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  command: "{{ splunk_path  }}/bin/splunk start --accept-license --answer-yes"
+  environment:
+   SPLUNK_HOME: "{{ splunk_path  }}"
+  tags: start_splunk
+
+- name:  change splunk admin password on searchhead and indexers
+  become: yes
+  #become_user: "{{ splunk_system_user }}"
+  become_user: root
+  command: "{{ splunk_path  }}/bin/splunk edit user admin -auth {{ splunk_admin }}:changeme -password {{ splunk_pass  }}"
+  environment:
+   SPLUNK_HOME: "{{ splunk_path  }}"
+  tags: set_password
+
+
+- name: add search peers or indexers to searchhead
+  become: yes
+  become_user: "{{ splunk_system_user_root }}"
+  command: "{{ splunk_path  }}/bin/splunk add search-server https://{{ indexer_ip }}:8089 -auth admin:{{ splunk_pass }} -remoteUsername admin -remotePassword {{ splunk_pass }}"
+  environment:
+   SPLUNK_HOME: "{{ splunk_path  }}"
+  tags: add_indexer
+
+- name: setup splunk to start at boot on indexer and searchhead
+  become: yes
+  command: "{{ splunk_path  }}/bin/splunk enable boot-start -user splunk --accept-license --answer-yes"
+  args:
+   creates: "{{ splunk_path }}/etc/users/splunk-system-user"
+  environment:
+   SPLUNK_HOME: "{{ splunk_path  }}"
+  tags: start_splunk
+
+- name: stop splunk service
+  become: yes
+  command: "{{ splunk_path  }}/bin/splunk stop"
+  environment:
+   SPLUNK_HOME: "{{ splunk_path  }}"
+  tags: stop_splunk
