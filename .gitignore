@@ -1,0 +1,8 @@
+*.pyc
+#splunkarchlab*
+playbook.retry*
+inventory/hosts*
+addtoignore-delete*
+tempfolder*
+env*
+*.pem
