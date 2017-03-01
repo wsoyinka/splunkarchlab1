@@ -44,7 +44,7 @@
     copy: no
     owner: "{{ splunk_system_user }}"
     group: "{{ splunk_system_user }}"
-    creates: "{{ splunkforwarder_path }}/bin/splunk"
+    creates: "{{ uf_path }}/bin/splunk"
 
 
 - name:  work around for splunk user woes
