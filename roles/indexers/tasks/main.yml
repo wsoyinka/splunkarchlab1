@@ -64,6 +64,26 @@
    SPLUNK_HOME: "{{ splunk_path  }}"
   tags: start_splunk
 
+# - name: set default hostname and set servername
+#   command: "{{ splunk_path  }}/bin/splunk set servername  soyinka-{{ item }} && {{ splunk_path  }}/bin/splunk set default-hostname  soyinka-searchhead"
+#   with_items:
+#    - {{ indexer1_name }}
+#    - {{ indexer2_name }}
+#   tags:
+#    - setsplunk-hostname
+
+- name:  work around for splunk user/permission woes
+  become: yes
+  become_user: root
+  file:
+   path: /root/.splunk
+   state: directory
+   mode: 0755
+   owner: "{{ splunk_system_user }}"
+   group: "{{ splunk_system_user }}"
+  tags:
+  - set_password
+
 - name:  change splunk admin password on searchhead and indexers
   become: yes
   #become_user: "{{ splunk_system_user }}"

@@ -47,6 +47,7 @@
    - downloadmainwget
 
 
+
 # - name: download installer for splunk
 #   get_url:
 #    url: '{{ main_installer_url }}'
@@ -69,6 +70,8 @@
     group: "{{ splunk_system_user }}"
     creates: "{{ splunk_path }}/bin/splunk"
 
+
+
 - name: accept splunk license on searchhead and indexers
   become: yes
   become_user: "{{ splunk_system_user }}"
@@ -76,6 +79,25 @@
   environment:
    SPLUNK_HOME: "{{ splunk_path  }}"
   tags: start_splunk
+
+
+# - name: set default hostname and set servername
+#   command: "{{ splunk_path  }}/bin/splunk set servername  soyinka-searchhead && {{ splunk_path  }}/bin/splunk set default-hostname  soyinka-searchhead"
+#   tags:
+#    - setdefault-hostname
+
+- name:  work around for splunk user woes
+  become: yes
+  become_user: root
+  file:
+   path: /root/.splunk
+   state: directory
+   mode: 0755
+   owner: "{{ splunk_system_user }}"
+   group: "{{ splunk_system_user }}"
+  tags:
+  - set_password
+
 
 - name:  change splunk admin password on searchhead and indexers
   become: yes
