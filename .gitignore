@@ -2,7 +2,7 @@
 splunkarchlab*
 2splunkarchlab*
 playbook.retry*
-inventory/hosts*
+#inventory/hosts*
 addtoignore-delete*
 tempfolder*
 env*

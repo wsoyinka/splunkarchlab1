@@ -1,0 +1,17 @@
+localhost ansible_connection=local
+
+[searchheads]
+localhost
+10.0.14.1
+
+[indexers]
+10.0.14.2
+10.0.14.3
+
+[forwarders]
+10.0.14.4
+10.0.14.5
+
+[nonsearchheads:children]
+indexers
+forwarders

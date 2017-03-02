@@ -20,36 +20,36 @@
 ###  The env/vars.yml file is an **importantant** component for this script to work.
 
 
-SPLUNKARCHLAB_BASE=splunkarchlab_base
-
 SPLUNKARCHLAB_DIR=splunkarchlab
 
-cd ~
 
-git clone https://github.com/wsoyinka/splunkarchlab1.git  $SPLUNKARCHLAB_BASE
-
-cd    $SPLUNKARCHLAB_BASE
+git clone https://github.com/wsoyinka/splunkarchlab1.git  $SPLUNKARCHLAB_DIR
 
 virtualenv  -p python2.7 $SPLUNKARCHLAB_DIR
 
-source $SPLUNKARCHLAB_DIR/bin/activate
+cd  $SPLUNKARCHLAB_DIR
+
+source bin/activate
 
 pwd
 
 pip -q install ansible
 
-ansible -m ping   all
 
-# ansible-playbook site.yml --tag downloadufwget,installuf   -l  forwarders
-#
-# ansible-playbook site.yml --tag set_root_dir,start_uf,start_uf_boot   -l  forwarders
-#
-# ansible-playbook site.yml --tag set_password1  -l  forwarders
+
+
+ansible-playbook site.yml --tag downloadufwget,installuf   -l  forwarders
+
+ansible-playbook site.yml --tag set_root_dir,start_uf,start_uf_boot   -l  forwarders
+
+ansible-playbook site.yml --tag set_password1  -l  forwarders
 
 
 
 
 #ansible-playbook site.yml --tag configure_uf_d_cli   -l  forwarders
+
+
 ###  searchhead
 
 #ansible-playbook site.yml --tag add_indexer1,add_indexer2  -l  searchhead
@@ -57,4 +57,19 @@ ansible -m ping   all
 
 #### INDEXERS
 
+
+
 #ansible-playbook site.yml --tag start_splunk,start_splunk_boot,set_root_dir,set_password_in  -l indexers
+
+## indexer1
+
+#sudo  /opt/splunk/bin/splunk set servername  soyinka-indexer1   -auth admin:ExpertInsight
+
+#sudo  /opt/splunk/bin/splunk set default-hostnampse  soyinka-indexer1   -auth admin:ExpertInsight
+
+
+## indexer2
+
+#sudo  /opt/splunk/bin/splunk set servername  soyinka-indexer2   -auth admin:ExpertInsight
+
+#sudo  /opt/splunk/bin/splunk set default-hostname  soyinka-indexer2   -auth admin:ExpertInsight
