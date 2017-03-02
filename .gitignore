@@ -1,5 +1,6 @@
 *.pyc
-splunkarchlab/*
+splunkarchlab*
+2splunkarchlab*
 playbook.retry*
 inventory/hosts*
 addtoignore-delete*
