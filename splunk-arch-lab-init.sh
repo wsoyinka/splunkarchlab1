@@ -28,6 +28,8 @@ ansible-playbook site.yml --tag configure_uf_d_cli   -l  forwarders
 
 
 
+ansible-playbook site.yml --tag start_splunk,start_splunk_boot,set_root_dir,set_password_in  -l indexers
+
 ## indexer1
 
 sudo  /opt/splunk/bin/splunk set servername  soyinka-indexer1   -auth admin:ExpertInsight

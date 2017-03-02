@@ -112,10 +112,19 @@
 - name: add search peers or indexers to searchhead
   become: yes
   become_user: "{{ splunk_system_user_root }}"
-  command: "{{ splunk_path  }}/bin/splunk add search-server https://{{ indexer_ip }}:8089 -auth admin:{{ splunk_pass }} -remoteUsername admin -remotePassword {{ splunk_pass }}"
+  command: "{{ splunk_path  }}/bin/splunk add search-server https://{{ indexer_ip1 }}:8089 -auth admin:{{ splunk_pass }} -remoteUsername admin -remotePassword {{ splunk_pass }}"
   environment:
    SPLUNK_HOME: "{{ splunk_path  }}"
-  tags: add_indexer
+  tags: add_indexer1
+
+
+- name: add search peers or indexers to searchhead
+  become: yes
+  become_user: "{{ splunk_system_user_root }}"
+  command: "{{ splunk_path  }}/bin/splunk add search-server https://{{ indexer_ip2 }}:8089 -auth admin:{{ splunk_pass }} -remoteUsername admin -remotePassword {{ splunk_pass }}"
+  environment:
+   SPLUNK_HOME: "{{ splunk_path  }}"
+  tags: add_indexer2
 
 - name: setup splunk to start at boot on indexer and searchhead
   become: yes

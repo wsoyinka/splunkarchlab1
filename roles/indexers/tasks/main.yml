@@ -71,7 +71,7 @@
    creates: "{{ splunk_path }}/etc/users/splunk-system-user"
   environment:
    SPLUNK_HOME: "{{ splunk_path  }}"
-  tags: start_splunk
+  tags: start_splunk_boot
 
 
 # - name: set default hostname and set servername
@@ -104,13 +104,13 @@
   tags: set_password_in
 
 
-- name: add search peers or indexers to searchhead
-  become: yes
-  become_user: "{{ splunk_system_user_root }}"
-  command: "{{ splunk_path  }}/bin/splunk add search-server https://{{ indexer_ip }}:8089 -auth admin:{{ splunk_pass }} -remoteUsername admin -remotePassword {{ splunk_pass }}"
-  environment:
-   SPLUNK_HOME: "{{ splunk_path  }}"
-  tags: add_indexer
+# - name: add search peers or indexers to searchhead
+#   become: yes
+#   become_user: "{{ splunk_system_user_root }}"
+#   command: "{{ splunk_path  }}/bin/splunk add search-server https://{{ indexer_ip }}:8089 -auth admin:{{ splunk_pass }} -remoteUsername admin -remotePassword {{ splunk_pass }}"
+#   environment:
+#    SPLUNK_HOME: "{{ splunk_path  }}"
+#   tags: add_indexer
 
 
 
