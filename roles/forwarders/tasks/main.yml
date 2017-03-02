@@ -57,7 +57,7 @@
    owner: "{{ splunk_system_user }}"
    group: "{{ splunk_system_user }}"
   tags:
-  - set_password
+  - set_root_dir
 
 - name: accept splunk license on forwarders
   become: yes
@@ -78,6 +78,15 @@
   environment:
    SPLUNK_HOME: "/opt/splunkforwarder"
   tags: start_uf_boot
+
+- name:  change splunk admin password on searchhead and indexers
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  #become_user: root
+  command: "{{ uf_path  }}/bin/splunk edit user admin -auth {{ splunk_admin }}:changeme -password {{ splunk_pass  }}"
+  environment:
+   SPLUNK_HOME: "{{ uf_path  }}"
+  tags: set_password1
 
 
 - name:  set deployment.conf from cli
