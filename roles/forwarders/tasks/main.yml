@@ -81,7 +81,7 @@
 
 - name:  change splunk admin password on searchhead and indexers
   become: yes
-  become_user: "{{ splunk_system_user }}"
+  become_user: root
   #become_user: root
   command: "{{ uf_path  }}/bin/splunk edit user admin -auth {{ splunk_admin }}:changeme -password {{ splunk_pass  }}"
   environment:
