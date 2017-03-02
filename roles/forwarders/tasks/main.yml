@@ -57,7 +57,7 @@
    owner: "{{ splunk_system_user }}"
    group: "{{ splunk_system_user }}"
   tags:
-  - set_root_dir
+   - set_root_dir
 
 - name: accept splunk license on forwarders
   become: yes
@@ -67,7 +67,8 @@
    creates: "{{ uf_path  }}/etc/users/splunk-system-user"
   environment:
    SPLUNK_HOME: "/opt/splunkforwarder"
-  tags: start_uf
+  tags:
+   - start_uf
 
 - name: setup splunk to start at boot on forwarders
   become: yes
@@ -77,7 +78,8 @@
    creates: "{{ uf_path }}/etc/users/splunk-system-user"
   environment:
    SPLUNK_HOME: "/opt/splunkforwarder"
-  tags: start_uf_boot
+  tags:
+   - start_uf_boot
 
 - name:  change splunk admin password on searchhead and indexers
   become: yes
@@ -86,7 +88,8 @@
   command: "{{ uf_path  }}/bin/splunk edit user admin -auth {{ splunk_admin }}:changeme -password {{ splunk_pass  }}"
   environment:
    SPLUNK_HOME: "{{ uf_path  }}"
-  tags: set_password1
+  tags:
+   - set_password1
 
 
 - name:  set deployment.conf from cli
@@ -96,7 +99,8 @@
   command: "{{ uf_path }}/bin/splunk set deploy-poll  {{ deployment_server_address }}:8089  -auth {{ splunk_admin }}:{{ splunk_pass  }}"
   environment:
    SPLUNK_HOME: "{{ uf_path }}"
-  tags: configure_uf_d_cli
+  tags:
+   - configure_uf_d_cli
 
 
 - name: stop splunk service
@@ -104,7 +108,8 @@
   command: "{{ uf_path  }}/bin/splunk stop"
   environment:
    SPLUNK_HOME: "{{ uf_path }}"
-  tags: stop_uf
+  tags:
+   - stop_uf
 
 
 
