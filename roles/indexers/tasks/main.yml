@@ -1,14 +1,14 @@
 ---
 # tasks file for indexers
 
-- name: Set authorized key from file
-  become: True
-  authorized_key:
-   user: '{{ splunklab_user }}'
-   state: present
-   key: "{{ lookup('file', '{{ splunklab_user_pub_home_path }}') }}"
-  tags:
-   - setauthkey
+# - name: Set authorized key from file
+#   become: True
+#   authorized_key:
+#    user: '{{ splunklab_user }}'
+#    state: present
+#    key: "{{ lookup('file', '{{ splunklab_user_pub_home_path }}') }}"
+#   tags:
+#    - setauthkey
 
 
 - name: add splunk user
@@ -64,6 +64,16 @@
    SPLUNK_HOME: "{{ splunk_path  }}"
   tags: start_splunk
 
+- name: setup splunk to start at boot on indexer and searchhead
+  become: yes
+  command: "{{ splunk_path  }}/bin/splunk enable boot-start -user splunk --accept-license --answer-yes"
+  args:
+   creates: "{{ splunk_path }}/etc/users/splunk-system-user"
+  environment:
+   SPLUNK_HOME: "{{ splunk_path  }}"
+  tags: start_splunk
+
+
 # - name: set default hostname and set servername
 #   command: "{{ splunk_path  }}/bin/splunk set servername  soyinka-{{ item }} && {{ splunk_path  }}/bin/splunk set default-hostname  soyinka-searchhead"
 #   with_items:
@@ -82,12 +92,12 @@
    owner: "{{ splunk_system_user }}"
    group: "{{ splunk_system_user }}"
   tags:
-  - set_password
+  - set_root_dir
 
 - name:  change splunk admin password on searchhead and indexers
   become: yes
-  become_user: "{{ splunk_system_user }}"
-#  become_user: root
+#  become_user: "{{ splunk_system_user }}"
+  become_user: root
   command: "{{ splunk_path  }}/bin/splunk edit user admin -auth {{ splunk_admin }}:changeme -password {{ splunk_pass  }}"
   environment:
    SPLUNK_HOME: "{{ splunk_path  }}"
@@ -102,14 +112,16 @@
    SPLUNK_HOME: "{{ splunk_path  }}"
   tags: add_indexer
 
-- name: setup splunk to start at boot on indexer and searchhead
-  become: yes
-  command: "{{ splunk_path  }}/bin/splunk enable boot-start -user splunk --accept-license --answer-yes"
-  args:
-   creates: "{{ splunk_path }}/etc/users/splunk-system-user"
-  environment:
-   SPLUNK_HOME: "{{ splunk_path  }}"
-  tags: start_splunk
+
+
+# - name:  set deployment.conf from cli
+#   become: yes
+#   command: "{{ uf_path }}/bin/splunk set deploy-poll  {{ deployment_server_address }}:8089  -auth {{ splunk_admin }}:{{ splunk_pass  }}"
+#   environment:
+#    SPLUNK_HOME: "{{ uf_path }}"
+#   tags:
+#    - configure_uf_d_cli
+
 
 - name: stop splunk service
   become: yes
