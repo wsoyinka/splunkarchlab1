@@ -81,7 +81,7 @@
   tags:
    - start_uf_boot
 
-- name:  change splunk admin password on searchhead and indexers
+- name:  change splunk admin forwarders
   become: yes
   become_user: root
   #become_user: root

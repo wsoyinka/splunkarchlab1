@@ -91,7 +91,7 @@
   command: "{{ splunk_path  }}/bin/splunk edit user admin -auth {{ splunk_admin }}:changeme -password {{ splunk_pass  }}"
   environment:
    SPLUNK_HOME: "{{ splunk_path  }}"
-  tags: set_password1
+  tags: set_password_sh_in
 
 
 - name: add search peers or indexers to searchhead
