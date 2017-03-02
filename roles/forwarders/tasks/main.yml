@@ -94,7 +94,7 @@
 
 - name:  set deployment.conf from cli
   become: yes
-  become_user: "{{ splunk_system_user }}"
+#  become_user: "{{ splunk_system_user }}"
   #become_user: root
   command: "{{ uf_path }}/bin/splunk set deploy-poll  {{ deployment_server_address }}:8089  -auth {{ splunk_admin }}:{{ splunk_pass  }}"
   environment:
@@ -110,7 +110,6 @@
    SPLUNK_HOME: "{{ uf_path }}"
   tags:
    - stop_uf
-
 
 
 

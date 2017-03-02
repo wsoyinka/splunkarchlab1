@@ -17,4 +17,6 @@ pip -q install ansible
 
 ansible-playbook site.yml --tag downloadufwget,installuf   -l  forwarders
 
-ansible-playbook site.yml --tag set_root_dir,start_uf,start_uf_boot   -l  forwarders  
+ansible-playbook site.yml --tag set_root_dir,start_uf,start_uf_boot   -l  forwarders
+
+ansible-playbook site.yml --tag set_password1  -l  forwarders
