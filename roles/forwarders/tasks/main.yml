@@ -12,27 +12,12 @@
    - createuser
 
 
-- name: del  splunk user
-  become: yes
-  user:
-   name: "{{ uf_system_user  }}"
-   remove: yes
-   state: absent
-  tags:
-   - deluser
-
 - name: download installer for splunk
   command: "wget -O {{ uf_installer_dest  }} {{ uf_installer_url }} "
   tags:
    - downloadufwget
 
-# - name: download installer for universal forwarder
-#   get_url:
-#    url: '{{ uf_installer_url }}'
-#    dest: '{{ uf_installer_dest  }}'
-#    validate_certs: no
-#   tags:
-#    - downloaduf
+
 
 - name: install UF splunk binary
   become: yes
@@ -46,18 +31,6 @@
     group: "{{ splunk_system_user }}"
     creates: "{{ uf_path }}/bin/splunk"
 
-
-- name:  work around for splunk user woes
-  become: yes
-  become_user: root
-  file:
-   path: /root/.splunk
-   state: directory
-   mode: 0755
-   owner: "{{ splunk_system_user }}"
-   group: "{{ splunk_system_user }}"
-  tags:
-   - set_root_dir
 
 - name: accept splunk license on forwarders
   become: yes
@@ -84,8 +57,6 @@
 - name:  change splunk admin forwarders
   become: yes
   become_user: "{{ splunk_system_user }}"
-  #become_user: root
-  #become_user: root
   command: "{{ uf_path  }}/bin/splunk edit user admin -auth {{ splunk_admin }}:changeme -password {{ splunk_pass  }}"
   environment:
    SPLUNK_HOME: "{{ uf_path  }}"
