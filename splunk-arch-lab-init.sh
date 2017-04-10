@@ -32,6 +32,7 @@ setup_ansible()
   cd    $SPLUNKARCHLAB_BASE
   virtualenv  -p python2.7 $SPLUNKARCHLAB_DIR
   source $SPLUNKARCHLAB_DIR/bin/activate
+  pip install --upgrade pip
   pwd
   pip -q install ansible
   ansible -m ping   all
