@@ -23,7 +23,7 @@
   command: 'touch  /home/{{ splunklab_user }}/foobaz '
   with_items:
      - forwarder_ip1
-     - forwarder_ip1
+     - forwarder_ip2
   tags:
    - sshid
 
