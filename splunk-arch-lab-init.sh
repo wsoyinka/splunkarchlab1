@@ -68,6 +68,8 @@ case  "$1" in
      #   ansible-playbook site.yml --tag createuser,sshid  -l  forwarders
         ansible-playbook site.yml --tag sshid_idxs  -l  searchheads
         ansible-playbook -v site.yml --tag indexers_role --skip-tags stop_splunk -l indexers
+        ansible-playbook -v site.yml --tag  setsplunk-hostname_idx1 -l idx1
+        ansible-playbook -v site.yml --tag  setsplunk-hostname_idx2 -l idx2
         # ansible-playbook -v site.yml --tag forwarders_role   --skip-tags set_password1,stop_uf  -l forwarders
       }
       setup_idxs
