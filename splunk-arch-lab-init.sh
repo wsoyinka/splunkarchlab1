@@ -51,22 +51,22 @@ case  "$1" in
       setup_searchhead
       ;;
    setup_fwd)
-      setup_fwd()
+      setup_fwds()
       {
         enable_virtualenv
      #   ansible-playbook site.yml --tag createuser,sshid  -l  forwarders
-        ansible-playbook site.yml --tag sshid  -l  searchheads
+        ansible-playbook site.yml --tag sshid_fwds  -l  searchheads
         ansible-playbook -v site.yml --tag forwarders_role --skip-tags stop_uf -l forwarders
         # ansible-playbook -v site.yml --tag forwarders_role   --skip-tags set_password1,stop_uf  -l forwarders
       }
-      setup_fwd
+      setup_fwds
       ;;
    setup_idxs)
       setup_idxs()
       {
         enable_virtualenv
      #   ansible-playbook site.yml --tag createuser,sshid  -l  forwarders
-        ansible-playbook site.yml --tag sshid  -l  searchheads
+        ansible-playbook site.yml --tag sshid_idxs  -l  searchheads
         ansible-playbook -v site.yml --tag indexers_role --skip-tags stop_splunk -l indexers
         # ansible-playbook -v site.yml --tag forwarders_role   --skip-tags set_password1,stop_uf  -l forwarders
       }
