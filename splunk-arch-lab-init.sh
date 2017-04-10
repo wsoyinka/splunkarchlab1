@@ -39,6 +39,9 @@ enable_virtualenv()
 }
 
 case  "$1" in
+  install_ansible)
+    install_ansible_searchhead
+    ;;
   setup_sh)
       setup_searchhead()
       {
@@ -47,17 +50,17 @@ case  "$1" in
       }
       setup_searchhead
       ;;
-   test_ping)
+   setup_sh)
       enable_virtualenv
       ansible -m ping   all
       ;;
     *)
-       echo $"Usage: $0 {start|stop|restart|condrestart|status}"
+       echo $"Usage: $0 {install_ansible|setup_sh|setup_sh}"
        exit 1
 esac
 
 
-install_ansible_searchhead
+
 
 # ansible-playbook site.yml --tag downloadufwget,installuf   -l  forwarders
 #
