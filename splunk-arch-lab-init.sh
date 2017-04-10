@@ -46,7 +46,7 @@ case  "$1" in
       setup_searchhead()
       {
         enable_virtualenv
-        ansible-playbook site.yml --tag ckey,setauthkey  -l  searchhead
+        ansible-playbook site.yml --tag ckey,setauthkey  -l  searchheads
       }
       setup_searchhead
       ;;
