@@ -50,12 +50,12 @@ case  "$1" in
       }
       setup_searchhead
       ;;
-   setup_sh)
+   test_ping)
       enable_virtualenv
       ansible -m ping   all
       ;;
     *)
-       echo $"Usage: $0 {install_ansible|setup_sh|setup_sh}"
+       echo $"Usage: $0 {install_ansible|setup_sh|test_ping}"
        exit 1
 esac
 
