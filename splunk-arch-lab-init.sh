@@ -20,16 +20,11 @@ set -o errexit
 ###  The env/vars.yml file is an **importantant** component for this script to work.
 
 
-SPLUNKARCHLAB_BASE=splunkarchlab_base
-
 SPLUNKARCHLAB_DIR=splunkarchlab
 
 setup_ansible()
 {
-  sudo yum -y install git gcc openssl-devel 
   cd ~
-  git clone https://github.com/wsoyinka/splunkarchlab1.git  $SPLUNKARCHLAB_BASE
-  cd    $SPLUNKARCHLAB_BASE
   virtualenv  -p python2.7 $SPLUNKARCHLAB_DIR
   source $SPLUNKARCHLAB_DIR/bin/activate
   pip install --upgrade pip
