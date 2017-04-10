@@ -24,21 +24,20 @@ SPLUNKARCHLAB_BASE=splunkarchlab_base
 
 SPLUNKARCHLAB_DIR=splunkarchlab
 
-cd ~
+setup_ansible()
+{
+  cd ~
+  git clone https://github.com/wsoyinka/splunkarchlab1.git  $SPLUNKARCHLAB_BASE
+  cd    $SPLUNKARCHLAB_BASE
+  virtualenv  -p python2.7 $SPLUNKARCHLAB_DIR
+  source $SPLUNKARCHLAB_DIR/bin/activate
+  pwd
+  pip -q install ansible
+  ansible -m ping   all
+}
 
-git clone https://github.com/wsoyinka/splunkarchlab1.git  $SPLUNKARCHLAB_BASE
+setup_ansible
 
-cd    $SPLUNKARCHLAB_BASE
-
-virtualenv  -p python2.7 $SPLUNKARCHLAB_DIR
-
-source $SPLUNKARCHLAB_DIR/bin/activate
-
-pwd
-
-pip -q install ansible
-
-ansible -m ping   all
 
 # ansible-playbook site.yml --tag downloadufwget,installuf   -l  forwarders
 #
