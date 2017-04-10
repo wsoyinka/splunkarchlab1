@@ -56,11 +56,15 @@
   tags: set_password_in
 
 - name: set default hostname and set servername idx1
+  become: yes
+  become_user: "{{ splunk_system_user }}"
   command: "{{ splunk_path  }}/bin/splunk set servername  {{ indexer1_name }} && {{ splunk_path  }}/bin/splunk set default-hostname  {{ indexer1_name }}"
   tags:
    - setsplunk-hostname_idx1
 
 - name: set default hostname and set servername idx2
+  become: yes
+  become_user: "{{ splunk_system_user }}"
   command: "{{ splunk_path  }}/bin/splunk set servername  {{ indexer2_name }} && {{ splunk_path  }}/bin/splunk set default-hostname  {{ indexer2_name }}"
   tags:
    - setsplunk-hostname_idx2
