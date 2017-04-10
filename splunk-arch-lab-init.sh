@@ -56,20 +56,25 @@ case  "$1" in
         enable_virtualenv
      #   ansible-playbook site.yml --tag createuser,sshid  -l  forwarders
         ansible-playbook site.yml --tag sshid  -l  searchheads
-        ansible-playbook -v site.yml --tag forwarders_role  -l forwarders
+        ansible-playbook -v site.yml --tag forwarders_role --skip-tags stop_uf -l forwarders
+        # ansible-playbook -v site.yml --tag forwarders_role   --skip-tags set_password1,stop_uf  -l forwarders
       }
       setup_fwd
       ;;
    ping_sh)
       enable_virtualenv
-      ansible -m ping   all
+      ansible all -m ping
       ;;
    ping_fwds)
       enable_virtualenv
-      ansible -m ping -l forwarders
+      ansible  forwarders -m ping
+      ;;
+    ping_idxs)
+      enable_virtualenv
+      ansible  indexers -m ping
       ;;
     *)
-       echo $"Usage: $0 {install_ansible|setup_sh|setup_fwd|ping_sh|ping_fwds }"
+       echo $"Usage: $0 {install_ansible | setup_sh | setup_fwd | ping_sh | ping_fwds| ping_idxs }"
        exit 1
 esac
 
