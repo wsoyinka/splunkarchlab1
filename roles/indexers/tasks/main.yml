@@ -32,6 +32,8 @@
   become: yes
   become_user: "{{ splunk_system_user }}"
   command: "{{ splunk_path  }}/bin/splunk start --accept-license --answer-yes"
+  args:
+   creates: "{{ splunk_path  }}/etc/users/splunk-system-user"
   environment:
    SPLUNK_HOME: "{{ splunk_path  }}"
   tags: start_splunk
