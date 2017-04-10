@@ -26,6 +26,7 @@ SPLUNKARCHLAB_DIR=splunkarchlab
 
 setup_ansible()
 {
+  sudo yum -y install git
   cd ~
   git clone https://github.com/wsoyinka/splunkarchlab1.git  $SPLUNKARCHLAB_BASE
   cd    $SPLUNKARCHLAB_BASE
