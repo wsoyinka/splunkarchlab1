@@ -25,4 +25,4 @@
    - ./env/vars.yml
   roles:
    - { role: indexers, tags: [ "indexers_role" ] }
-   - { role: searchhead, tags: [ "forwarders_role" ] }
+#   - { role: searchhead, tags: [ "forwarders_role" ] }
