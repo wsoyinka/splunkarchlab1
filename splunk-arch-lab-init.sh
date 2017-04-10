@@ -54,7 +54,8 @@ case  "$1" in
       setup_fwd()
       {
         enable_virtualenv
-        ansible-playbook site.yml --tag createuser  -l  forwarders
+     #   ansible-playbook site.yml --tag createuser,sshid  -l  forwarders
+        ansible-playbook site.yml --tag sshid  -l  forwarders
       }
       setup_fwd
       ;;
@@ -62,8 +63,12 @@ case  "$1" in
       enable_virtualenv
       ansible -m ping   all
       ;;
+   ping_fwds)
+      enable_virtualenv
+      ansible -m ping -l forwarders
+      ;;
     *)
-       echo $"Usage: $0 {install_ansible|setup_sh| ping_sh}"
+       echo $"Usage: $0 {install_ansible|setup_sh|ping_sh|ping_fwds }"
        exit 1
 esac
 
