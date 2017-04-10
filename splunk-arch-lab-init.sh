@@ -19,12 +19,12 @@ set -o errexit
 ### publicly viewable git repo
 ###  The env/vars.yml file is an **importantant** component for this script to work.
 
-
+SPLUNKARCHLAB_BASE=splunkarchlab_base
 SPLUNKARCHLAB_DIR=splunkarchlab
 
 setup_ansible()
 {
-  cd ~
+  cd ~/$SPLUNKARCHLAB_BASE 
   virtualenv  -p python2.7 $SPLUNKARCHLAB_DIR
   source $SPLUNKARCHLAB_DIR/bin/activate
   pip install --upgrade pip
