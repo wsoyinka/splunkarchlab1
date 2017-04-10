@@ -47,15 +47,6 @@
    SPLUNK_HOME: "{{ splunk_path  }}"
   tags: start_splunk_boot
 
-
-# - name: set default hostname and set servername
-#   command: "{{ splunk_path  }}/bin/splunk set servername  soyinka-{{ item }} && {{ splunk_path  }}/bin/splunk set default-hostname  soyinka-searchhead"
-#   with_items:
-#    - {{ indexer1_name }}
-#    - {{ indexer2_name }}
-#   tags:
-#    - setsplunk-hostname
-
 - name:  change splunk admin password on indexers
   become: yes
   become_user: "{{ splunk_system_user }}"
@@ -63,6 +54,16 @@
   environment:
    SPLUNK_HOME: "{{ splunk_path  }}"
   tags: set_password_in
+
+- name: set default hostname and set servername idx1
+  command: "{{ splunk_path  }}/bin/splunk set servername  {{ indexer1_name }} && {{ splunk_path  }}/bin/splunk set default-hostname  {{ indexer1_name }}"
+  tags:
+   - setsplunk-hostname_idx1
+
+- name: set default hostname and set servername idx2
+  command: "{{ splunk_path  }}/bin/splunk set servername  {{ indexer2_name }} && {{ splunk_path  }}/bin/splunk set default-hostname  {{ indexer2_name }}"
+  tags:
+   - setsplunk-hostname_idx2
 
 
 # - name: add search peers or indexers to searchhead
