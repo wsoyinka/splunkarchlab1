@@ -1,15 +1,6 @@
 ---
 # tasks file for indexers
 
-# - name: Set authorized key from file
-#   become: True
-#   authorized_key:
-#    user: '{{ splunklab_user }}'
-#    state: present
-#    key: "{{ lookup('file', '{{ splunklab_user_pub_home_path }}') }}"
-#   tags:
-#    - setauthkey
-
 
 - name: add splunk user
   become: yes
@@ -21,28 +12,10 @@
   tags:
    - createuser
 
-- name: del  splunk user
-  become: yes
-  user:
-   name: "{{ splunk_system_user  }}"
-   remove: yes
-   state: absent
-  tags:
-   - deluser
-
-
 - name: download installer for splunk
   command: "wget -O {{ main_installer_dest  }} {{ main_installer_url }} "
   tags:
    - downloadmainwget
-
-# - name: download installer for splunk
-#   get_url:
-#    url: '{{ main_installer_url }}'
-#    dest: '{{ main_installer_dest  }}'
-#    validate_certs: no
-#   tags:
-#    - downloadmain
 
 - name: install Main splunk binary
   become: yes
@@ -82,22 +55,9 @@
 #   tags:
 #    - setsplunk-hostname
 
-- name:  work around for splunk user/permission woes
-  become: yes
-  become_user: root
-  file:
-   path: /root/.splunk
-   state: directory
-   mode: 0755
-   owner: "{{ splunk_system_user }}"
-   group: "{{ splunk_system_user }}"
-  tags:
-  - set_root_dir
-
 - name:  change splunk admin password on searchhead and indexers
   become: yes
-#  become_user: "{{ splunk_system_user }}"
-  become_user: root
+  become_user: "{{ splunk_system_user }}"
   command: "{{ splunk_path  }}/bin/splunk edit user admin -auth {{ splunk_admin }}:{{ splunk_pass  }} -password {{ splunk_pass  }}"
   environment:
    SPLUNK_HOME: "{{ splunk_path  }}"
