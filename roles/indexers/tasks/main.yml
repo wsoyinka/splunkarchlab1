@@ -55,10 +55,10 @@
 #   tags:
 #    - setsplunk-hostname
 
-- name:  change splunk admin password on searchhead and indexers
+- name:  change splunk admin password on indexers
   become: yes
   become_user: "{{ splunk_system_user }}"
-  command: "{{ splunk_path  }}/bin/splunk edit user admin -auth {{ splunk_admin }}:{{ splunk_pass  }} -password {{ splunk_pass  }}"
+  command: "{{ splunk_path  }}/bin/splunk edit user admin -auth {{ splunk_admin }}:{{ splunk_pass_old }} -password {{ splunk_pass  }}"
   environment:
    SPLUNK_HOME: "{{ splunk_path  }}"
   tags: set_password_in
