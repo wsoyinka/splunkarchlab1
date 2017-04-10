@@ -22,7 +22,7 @@ set -o errexit
 SPLUNKARCHLAB_BASE=splunkarchlab_base
 SPLUNKARCHLAB_DIR=splunkarchlab
 
-setup_ansible()
+install_ansible_searchhead()
 {
   cd ~/$SPLUNKARCHLAB_BASE 
   virtualenv  -p python2.7 $SPLUNKARCHLAB_DIR
@@ -33,8 +33,31 @@ setup_ansible()
   ansible -m ping   all
 }
 
-setup_ansible
+enable_virtualenv()
+{
+ source $SPLUNKARCHLAB_DIR/bin/activate
+}
 
+case  "$1" in
+  setup_sh)
+      setup_searchhead()
+      {
+        enable_virtualenv
+        ansible-playbook site.yml --tag ckey,setauthkey  -l  searchhead
+      }
+      setup_searchhead
+      ;;
+   test_ping)
+      enable_virtualenv
+      ansible -m ping   all
+      ;;
+    *)
+       echo $"Usage: $0 {start|stop|restart|condrestart|status}"
+       exit 1
+esac
+
+
+install_ansible_searchhead
 
 # ansible-playbook site.yml --tag downloadufwget,installuf   -l  forwarders
 #
@@ -46,6 +69,7 @@ setup_ansible
 
 
 #ansible-playbook site.yml --tag configure_uf_d_cli   -l  forwarders
+
 ###  searchhead
 
 #ansible-playbook site.yml --tag add_indexer1,add_indexer2  -l  searchhead
