@@ -22,8 +22,8 @@
   command: "ssh-copy-id  -i {{ splunklab_user_pub_home_path }}  {{ splunklab_user }}@{{ item }} "
  # command: 'touch  /home/{{ splunklab_user }}/foobaz '
   with_items:
-     - {{ forwarder_ip1 }}
-     - {{ forwarder_ip2 }}
+     - "{{ forwarder_ip1 }}"
+     - "{{ forwarder_ip2 }}"
   tags:
    - sshid
 
