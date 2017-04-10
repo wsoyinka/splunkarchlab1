@@ -50,12 +50,20 @@ case  "$1" in
       }
       setup_searchhead
       ;;
-   test_ping)
+   setup_fwd)
+      setup_fwd()
+      {
+        enable_virtualenv
+        ansible-playbook site.yml --tag createuser  -l  forwarders
+      }
+      setup_fwd
+      ;;
+   ping_sh)
       enable_virtualenv
       ansible -m ping   all
       ;;
     *)
-       echo $"Usage: $0 {install_ansible|setup_sh|test_ping}"
+       echo $"Usage: $0 {install_ansible|setup_sh| ping_sh}"
        exit 1
 esac
 
