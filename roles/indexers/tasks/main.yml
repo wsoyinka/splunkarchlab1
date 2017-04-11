@@ -121,6 +121,7 @@
   tags:
    - configure_idx_d_cli
   notify: restart splunk
+  ignore_errors: yes
   
 - name:  show indexers to listening status or port
   become: yes
