@@ -26,10 +26,16 @@
     - set_sh1_hostname
 
 - name: check if splunk is installed
-  tags: install
+  tags: add_indexers_to_sh
   stat: 
     path: "{{ splunk_path }}/etc/system/local/distsearch.conf"
   register: splunk_path_check
+
+- name: splunk is installed
+  tags: add_indexers_to_sh
+  debug: 
+    msg: "splunk is already installed under {{ splunkforwarder_path }}"
+  when: splunk_path_check.stat.exists
 
 
 - name: copy ssh key to forwarders 
@@ -162,7 +168,7 @@
   become: yes
   become_user: "{{ splunk_system_user }}"
   command: "{{ splunk_path  }}/bin/splunk list search-server  -auth admin:{{ splunk_pass }} -remoteUsername admin -remotePassword {{ splunk_pass }}"
-  tags: list_search_servers
+  tags: add_indexers_to_sh
   
   
 - name: create app to create index
