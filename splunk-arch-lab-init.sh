@@ -60,7 +60,7 @@ case  "$1" in
       setup_fwds()
       {
         enable_virtualenv
-        ansible-vault decrypt  env/vars.yml --ask-vault-pass
+        ansible-vault decrypt  env/vars.yml 
      #   ansible-playbook site.yml --tag createuser,sshid  -l  forwarders
         ansible-playbook site.yml --tag sshid_fwds  -l  searchheads
         ansible-playbook -v site.yml --tag forwarders_role --skip-tags stop_uf -l forwarders
@@ -74,7 +74,7 @@ case  "$1" in
       setup_idxs()
       {
         enable_virtualenv
-        ansible-vault decrypt  env/vars.yml --ask-vault-pass
+        ansible-vault decrypt  env/vars.yml 
      #   ansible-playbook site.yml --tag createuser,sshid  -l  forwarders
         ansible-playbook site.yml --tag sshid_idxs  -l  searchheads
         ansible-playbook -v site.yml --tag indexers_role --skip-tags stop_splunk -l indexers
