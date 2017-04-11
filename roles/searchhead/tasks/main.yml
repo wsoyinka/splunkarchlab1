@@ -28,7 +28,7 @@
 - name: check if splunk is installed
   tags: add_indexers_to_sh
   stat: 
-    path: "{{ splunk_path }}"
+    path: "{{ splunk_path }}/etc/system/local/distsearch.conf"
   register: splunk_path_check
 
 - name: splunk is installed
@@ -162,7 +162,7 @@
    SPLUNK_HOME: "{{ splunk_path  }}"
   tags: add_indexers_to_sh
   notify: restart splunk
-  when: "{{ splunk_path_check}}"/etc/system/local/distsearch.conf.stat.exists == false
+  when: splunk_path_check.stat.exists == false
   
 - name: list search peers or indexers configured on searchhead in $SPLUNK_HOME/etc/system/local/distsearch.conf
   become: yes
