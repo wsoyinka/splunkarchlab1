@@ -85,12 +85,14 @@
    SPLUNK_HOME: "{{ splunk_path  }}"
   tags: start_splunk
 
-
-# - name: set default hostname and set servername
-#   command: "{{ splunk_path  }}/bin/splunk set servername  soyinka-searchhead && {{ splunk_path  }}/bin/splunk set default-hostname  soyinka-searchhead"
-#   tags:
-#    - setdefault-hostname
-
+- name: setup splunk to start at boot on searchhead
+  become: yes
+  command: "{{ splunk_path  }}/bin/splunk enable boot-start -user splunk --accept-license --answer-yes"
+  args:
+   creates: "{{ splunk_path }}/etc/users/splunk-system-user"
+  environment:
+   SPLUNK_HOME: "{{ splunk_path  }}"
+  tags: start_splunk
 
 - name:  change splunk admin password on searchhead and indexers
   become: yes
@@ -116,33 +118,22 @@
 
 - name: add search peers or indexers to searchhead
   become: yes
-  become_user: "{{ splunk_system_user_root }}"
-  command: "{{ splunk_path  }}/bin/splunk add search-server https://{{ indexer_ip1 }}:8089 -auth admin:{{ splunk_pass }} -remoteUsername admin -remotePassword {{ splunk_pass }}"
+  become_user: "{{ splunk_system_user }}"
+  command: "{{ splunk_path  }}/bin/splunk add search-server https://{{ item }}:8089 -auth admin:{{ splunk_pass }} -remoteUsername admin -remotePassword {{ splunk_pass }}"
+  with_items:
+   - "{{ indexer_ip1 }}"
+   - "{{ indexer_ip2 }}"
   environment:
    SPLUNK_HOME: "{{ splunk_path  }}"
-  tags: add_indexer1
+  tags: add_indexers_to_sh
 
 
-- name: add search peers or indexers to searchhead
-  become: yes
-  become_user: "{{ splunk_system_user_root }}"
-  command: "{{ splunk_path  }}/bin/splunk add search-server https://{{ indexer_ip2 }}:8089 -auth admin:{{ splunk_pass }} -remoteUsername admin -remotePassword {{ splunk_pass }}"
-  environment:
-   SPLUNK_HOME: "{{ splunk_path  }}"
-  tags: add_indexer2
+#- name: add search peers or indexers to searchhead
+#  become: yes
+#  become_user: "{{ splunk_system_user }}"
+#  command: "{{ splunk_path  }}/bin/splunk add search-server https://{{ indexer_ip2 }}:8089 -auth admin:{{ splunk_pass }} -remoteUsername admin -remotePassword {{ splunk_pass }}"
+#  environment:
+#   SPLUNK_HOME: "{{ splunk_path  }}"
+#  tags: add_indexer2
 
-- name: setup splunk to start at boot on searchhead
-  become: yes
-  command: "{{ splunk_path  }}/bin/splunk enable boot-start -user splunk --accept-license --answer-yes"
-  args:
-   creates: "{{ splunk_path }}/etc/users/splunk-system-user"
-  environment:
-   SPLUNK_HOME: "{{ splunk_path  }}"
-  tags: start_splunk
 
-- name: stop splunk service
-  become: yes
-  command: "{{ splunk_path  }}/bin/splunk stop"
-  environment:
-   SPLUNK_HOME: "{{ splunk_path  }}"
-  tags: stop_splunk
