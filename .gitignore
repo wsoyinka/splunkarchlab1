@@ -6,6 +6,6 @@ playbook.retry*
 addtoignore-delete*
 tempfolder*
 2splunk-arch-lab-init*
-env*
+#env*
 hostname_*
 *.pem

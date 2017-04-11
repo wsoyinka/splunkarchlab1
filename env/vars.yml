@@ -1,0 +1,53 @@
+#splunklab_user: archStudent
+splunklab_user: ec2-user
+splunklab_user_key_home_path: "/home/{{ splunklab_user }}/.ssh/id_rsa_searchhead"
+splunklab_user_pub_home_path: "/home/{{ splunklab_user }}/.ssh/id_rsa_searchhead.pub"
+uf_installer_url: "https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=6.5.2&product=universalforwarder&filename=splunkforwarder-6.5.2-67571ef4b87d-Linux-x86_64.tgz&wget=true"
+uf_installer_dest: "/home/{{ splunklab_user }}/splunkforwarder-6.5.2-67571ef4b87d-Linux-x86_64.tgz"
+main_installer_url:  "https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=6.5.2&product=splunk&filename=splunk-6.5.2-67571ef4b87d-Linux-x86_64.tgz&wget=true"
+main_installer_dest:  "/home/{{ splunklab_user }}/splunk-6.5.2-67571ef4b87d-Linux-x86_64.tgz"
+#SPLUNK_HOME: "/opt/splunkforwarder/"
+uf_default_index: default
+
+###  Config file variables
+
+#
+#
+forwarder_ip1: "{{ hostvars['fwd1']['ansible_host'] }}"
+forwarder_ip2: "{{ hostvars['fwd2']['ansible_host'] }}"
+indexer_ip1: "{{ hostvars['idx1']['ansible_host'] }}"
+indexer_ip2: "{{ hostvars['idx2']['ansible_host'] }}"
+
+indexer1_name: soyinka-INDEXER1
+indexer2_name: soyinka-INDEXER2
+fwd1_name: soyinka-FORWARDER1
+fwd2_name: soyinka-FORWARDER2
+sh1_name: soyinka-SEARCHHEAD
+
+splunk_admin: admin
+splunk_pass_old: changeme
+splunk_pass: ExpertInsight
+deployment_server_address: 10.0.14.1
+
+uf_path: /opt/splunkforwarder
+splunk_path: /opt/splunk
+uf_system_user: splunk
+splunk_system_user: splunk
+
+#uf_system_user_test: bobbyjoe
+
+uf_system_user_root: root
+splunk_system_user_root: root
+
+uf_outputs_text: |
+  defaultGroup = primary
+  [tcpout:primary]
+  #server = localhost:9997, server_one:9997, server_two:9997
+  server = 10.10.0.191:9997
+
+uf_inputs_text: |
+   [default]
+   index = {{ uf_default_index }}
+
+   [monitor://$SPLUNK_HOME/var/log/splunk]
+   index = _internal
