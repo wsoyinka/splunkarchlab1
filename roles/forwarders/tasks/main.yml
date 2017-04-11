@@ -18,12 +18,14 @@
    - downloadufwget
 
 - name: set fwd1 system hostname
+  become: yes
   hostname:
     name: fwd1
   tags:
     - set_fwd1_hostname
     
 - name: set fwd2 system hostname
+  become: yes
   hostname:
     name: fwd2
   tags:
