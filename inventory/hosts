@@ -4,13 +4,14 @@ localhost ansible_connection=local
 sh1 ansible_host=localhost
 #10.0.14.1
 
-[indexers]
-idx1 ansible_host=10.20.0.234
-idx2 ansible_host=10.20.0.250
-
 [forwarders]
-fwd1 ansible_host=10.20.0.204
-fwd2  ansible_host=10.20.0.226
+fwd1 ansible_host=10.20.0.53
+fwd2  ansible_host=10.20.0.79
+
+[indexers]
+idx1 ansible_host=10.20.0.177
+idx2 ansible_host=10.20.0.228
+
 
 
 [nonsearchheads:children]
