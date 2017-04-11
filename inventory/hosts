@@ -1,7 +1,7 @@
 localhost ansible_connection=local
 
 [searchheads]
-localhost
+sh1 ansible_host=localhost
 #10.0.14.1
 
 [indexers]
