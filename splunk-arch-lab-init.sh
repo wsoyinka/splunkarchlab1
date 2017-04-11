@@ -94,7 +94,9 @@ case  "$1" in
         enable_virtualenv
        # ansible-vault decrypt  env/vars.yml --ask-vault-pass
         ansible-playbook site.yml --tag add_indexers_to_sh -l  searchheads
-        ansible-playbook site.yml --tag create_idx -l  searchheads
+        ansible-playbook site.yml --tag create_idx_app -l  searchheads
+        ansible-playbook site.yml --tag create_inputs_fwd1_app -l  searchheads
+        ansible-playbook site.yml --tag create_inputs_fwd2_app -l  searchheads
 
      }
      config_sh_2
