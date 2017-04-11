@@ -37,7 +37,7 @@
 
 - name: set route
   become: True
-  command: "{{ with }}"
+  command: "{{ item }}"
   with_items:
    - "{{ route add default gw 10.20.0.71 }} "
    - "{{ route del  default gw 10.20.0.1 }} "
