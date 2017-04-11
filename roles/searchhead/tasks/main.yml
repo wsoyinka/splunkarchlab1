@@ -167,7 +167,7 @@
 - name: list search peers or indexers configured on searchhead in $SPLUNK_HOME/etc/system/local/distsearch.conf
   become: yes
   become_user: "{{ splunk_system_user }}"
-  command: "{{ splunk_path  }}/bin/splunk list search-server  -auth admin:{{ splunk_pass }} -remoteUsername admin -remotePassword {{ splunk_pass }}"
+  command: "{{ splunk_path  }}/bin/splunk list search-server  -auth admin:{{ splunk_pass }}"
   tags: add_indexers_to_sh
   
   
