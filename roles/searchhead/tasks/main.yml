@@ -91,7 +91,7 @@
     creates: "{{ splunk_path }}/bin/splunk"
 
 
-- name: accept splunk license on searchhead and indexers
+- name: accept splunk license on searchhead
   become: yes
   become_user: "{{ splunk_system_user }}"
   command: "{{ splunk_path  }}/bin/splunk start --accept-license --answer-yes"
