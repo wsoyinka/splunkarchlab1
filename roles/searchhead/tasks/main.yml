@@ -36,7 +36,7 @@
    - sshid_idxs
 
 - name: set route
-  become: True
+  become: yes
   become_user: "{{ splunk_system_user }}"
   command: "{{ item }}"
   with_items:
