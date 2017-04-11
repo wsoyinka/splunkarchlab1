@@ -69,7 +69,7 @@
 - name: set default hostname and set servername idx2
   become: yes
   become_user: "{{ splunk_system_user }}"
-  command: 
+  command: "{{ item }}"
   with_items:
   - "{{ splunk_path  }}/bin/splunk set servername {{ indexer2_name }} -auth {{ splunk_admin }}:{{ splunk_pass }} "
   - "{{ splunk_path  }}/bin/splunk set default-hostname  {{ indexer2_name }} -auth {{ splunk_admin }}:{{ splunk_pass }}"
