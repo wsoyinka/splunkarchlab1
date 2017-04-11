@@ -27,7 +27,7 @@ sh1_name: soyinka-SEARCHHEAD
 splunk_admin: admin
 splunk_pass_old: changeme
 splunk_pass: ExpertInsight
-deployment_server_address: 10.0.14.1
+deployment_server_address: "{{ hostvars['sh1']['ansible_host'] }}"
 
 uf_path: /opt/splunkforwarder
 splunk_path: /opt/splunk
