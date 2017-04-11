@@ -122,18 +122,18 @@
    - configure_uf_i
   template:
     src: inputs.conf.j2
-    dest: "{{ uf_path }}/etc/system/local/inputs.conf-test"
+    dest: "{{ uf_path }}/etc/system/local/inputs.conf"
     owner: "{{ splunk_system_user }}"
     group: "{{ splunk_system_user }}"
 
 
-- name: template deploymentclient.conf
-  become: yes
-  become_user: "{{ splunk_system_user }}"
-  tags:
-   - configure_uf_d
-  template:
-    src: deploymentclient.conf.j2
-    dest: "{{ uf_path }}/etc/system/local/deploymentclient.conf.wale"
-    owner: "{{ splunk_system_user }}"
-    group: "{{ splunk_system_user }}"
+#- name: template deploymentclient.conf
+#  become: yes
+#  become_user: "{{ splunk_system_user }}"
+#  tags:
+#   - configure_uf_d
+#  template:
+#    src: deploymentclient.conf.j2
+#    dest: "{{ uf_path }}/etc/system/local/deploymentclient.conf.wale"
+#    owner: "{{ splunk_system_user }}"
+#    group: "{{ splunk_system_user }}"
