@@ -57,6 +57,8 @@ case  "$1" in
      #   ansible-playbook site.yml --tag createuser,sshid  -l  forwarders
         ansible-playbook site.yml --tag sshid_fwds  -l  searchheads
         ansible-playbook -v site.yml --tag forwarders_role --skip-tags stop_uf -l forwarders
+        ansible-playbook -v site.yml --tag  setsplunk-hostname_fwd1 -l fwd1
+        ansible-playbook -v site.yml --tag  setsplunk-hostname_fwd2 -l fwd2
         # ansible-playbook -v site.yml --tag forwarders_role   --skip-tags set_password1,stop_uf  -l forwarders
       }
       setup_fwds
