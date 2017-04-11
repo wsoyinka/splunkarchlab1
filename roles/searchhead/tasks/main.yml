@@ -34,7 +34,7 @@
 - name: splunk is installed
   tags: add_indexers_to_sh
   debug: 
-    msg: "splunk is already installed under {{ splunkforwarder_path }}"
+    msg: "splunk is already installed under {{ splunk_path }}"
   when: splunk_path_check.stat.exists
 
 
