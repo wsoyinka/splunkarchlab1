@@ -56,7 +56,7 @@ case  "$1" in
       }
       setup_searchhead
       ;;
-   setup_fwd)
+   setup_fwds)
       setup_fwds()
       {
         enable_virtualenv
@@ -83,7 +83,15 @@ case  "$1" in
         # ansible-playbook -v site.yml --tag forwarders_role   --skip-tags set_password1,stop_uf  -l forwarders
       }
       setup_idxs
-      ;;  
+      ;;
+   config_sh_2)
+     config_sh_2()
+     {
+        enable_virtualenv
+        ansible-vault decrypt  env/vars.yml --ask-vault-pass
+        ansible-playbook site.yml --tag add_indexers_to_sh -l  searchheads
+
+     }
    ping_sh)
       enable_virtualenv
       ansible all -m ping
@@ -97,7 +105,7 @@ case  "$1" in
       ansible  indexers -m ping
       ;;
     *)
-       echo $"Usage: $0 {install_ansible | setup_sh | setup_fwd | setup_idxs | ping_sh | ping_fwds| ping_idxs }"
+       echo $"Usage: $0 {install_ansible | setup_sh | setup_fwds | setup_idxs | ping_sh | ping_fwds| ping_idxs | config_sh_2 }"
        exit 1
 esac
 
