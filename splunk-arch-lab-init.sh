@@ -92,6 +92,8 @@ case  "$1" in
         ansible-playbook site.yml --tag add_indexers_to_sh -l  searchheads
 
      }
+     config_sh_2
+     ;;
    ping_sh)
       enable_virtualenv
       ansible all -m ping
