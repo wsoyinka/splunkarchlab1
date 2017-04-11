@@ -1,17 +1,26 @@
+[monitor:///opt/log/www*/access.log]
+blacklist = secure.*
+disabled = false
+index = web_test1
+whitelist = access.*
+host_segment = 3
+
+[monitor:///opt/log/www*/secure.log]
+blacklist = access.*
+disabled = false
+index = main_test1
+whitelist = secure.*
+host_segment = 3
+
+
 [monitor://var/log/httpd]
 whitelist = access*
 #host = whatever
 #host_segment = 3
-index = web
+index = web_test1
 
 [monitor://var/log]
 whitelist = secure*
-index = main
+index = main_test1
 
-[monitor:///opt/log]
-blacklist = secure.*
-disabled = false
-index = sales
-whitelist = www.*
-host = www-13
 
