@@ -137,20 +137,7 @@
   command: "{{ uf_path }}/bin/splunk list forward-server  -auth {{ splunk_admin }}:{{ splunk_pass  }}"
   tags:
    - show_uf_outputs_cli
-
-#- name: template out outputs.conf
-#  become: yes
-#  become_user: "{{ splunk_system_user }}"
-#  tags:
-#   - configure_uf_o
-#  template:
-#    src: outputs.conf.j2
-#    dest: "{{ uf_path }}/etc/system/local/outputs.conf"
-#    owner: "{{ splunk_system_user }}"
-#    group: "{{ splunk_system_user }}"
-    
-    
-
+   
 
 - name: template out inputs.conf
   become: yes
@@ -163,16 +150,3 @@
     owner: "{{ splunk_system_user }}"
     group: "{{ splunk_system_user }}"
     
-
-
-
-#- name: template deploymentclient.conf
-#  become: yes
-#  become_user: "{{ splunk_system_user }}"
-#  tags:
-#   - configure_uf_d
-#  template:
-#    src: deploymentclient.conf.j2
-#    dest: "{{ uf_path }}/etc/system/local/deploymentclient.conf.wale"
-#    owner: "{{ splunk_system_user }}"
-#    group: "{{ splunk_system_user }}"
