@@ -19,7 +19,7 @@
    - setauthkey
 
 - name: copy ssh key to forwarders 
-  command: "ssh-copy-id  -i {{ splunklab_user_pub_home_path }}  {{ splunklab_user }}@{{ item }} "
+  command: "ssh-copy-id   -o StrictHostKeyChecking=no -i {{ splunklab_user_pub_home_path }}  {{ splunklab_user }}@{{ item }} "
  # command: 'touch  /home/{{ splunklab_user }}/foobaz '
   with_items:
      - "{{ forwarder_ip1 }}"
@@ -28,7 +28,7 @@
    - sshid_fwds
  
 - name: copy ssh key to indexers
-  command: "ssh-copy-id  -i {{ splunklab_user_pub_home_path }}  {{ splunklab_user }}@{{ item }} "
+  command: "ssh-copy-id  -o StrictHostKeyChecking=no  -i {{ splunklab_user_pub_home_path }}  {{ splunklab_user }}@{{ item }} "
   with_items:
    - "{{ indexer_ip1 }}"
    - "{{ indexer_ip2 }}"
