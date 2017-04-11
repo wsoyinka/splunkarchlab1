@@ -132,4 +132,15 @@
    - show_idx_d_cli 
   
   
+- name: create frozen dir on idxs
+  become: yes
+  file:
+    path: "/opt/frozen"
+    state: directory
+    owner: "{{ splunk_system_user }}"
+    group: "{{ splunk_system_user }}"
+    mode: 0755
+  tags:
+   - create_idxs_frozen_dir
+  
  
