@@ -24,7 +24,7 @@ SPLUNKARCHLAB_DIR=splunkarchlab
 
 install_ansible_searchhead()
 {
-  cd ~/$SPLUNKARCHLAB_BASE 
+  #cd ~/$SPLUNKARCHLAB_BASE 
   virtualenv  -p python2.7 $SPLUNKARCHLAB_DIR
   source $SPLUNKARCHLAB_DIR/bin/activate
   pip install --upgrade pip
