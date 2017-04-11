@@ -76,30 +76,25 @@
   tags:
    - setsplunk-hostname_idx2
   notify: restart splunk
+  
+- name:  set deployment.conf from cli
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  command: "{{ splunk_path }}/bin/splunk set deploy-poll  {{ deployment_server_address }}:8089  -auth {{ splunk_admin }}:{{ splunk_pass  }}"
+  environment:
+   SPLUNK_HOME: "{{ splunk_path }}"
+  tags:
+   - configure_idx_d_cli
+  notify: restart splunk
+  
+  
+- name:  show deployment.conf status from cli
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  command: "{{ splunk_path }}/bin/splunk show deploy-poll  -auth {{ splunk_admin }}:{{ splunk_pass  }}"
+  environment:
+   SPLUNK_HOME: "{{ splunk_path }}"
+  tags:
+   - configure_idx_d_cli
 
 
-# - name: add search peers or indexers to searchhead
-#   become: yes
-#   become_user: "{{ splunk_system_user_root }}"
-#   command: "{{ splunk_path  }}/bin/splunk add search-server https://{{ indexer_ip }}:8089 -auth admin:{{ splunk_pass }} -remoteUsername admin -remotePassword {{ splunk_pass }}"
-#   environment:
-#    SPLUNK_HOME: "{{ splunk_path  }}"
-#   tags: add_indexer
-
-
-
-# - name:  set deployment.conf from cli
-#   become: yes
-#   command: "{{ uf_path }}/bin/splunk set deploy-poll  {{ deployment_server_address }}:8089  -auth {{ splunk_admin }}:{{ splunk_pass  }}"
-#   environment:
-#    SPLUNK_HOME: "{{ uf_path }}"
-#   tags:
-#    - configure_uf_d_cli
-
-
-#- name: stop splunk service
-#  become: yes
-#  command: "{{ splunk_path  }}/bin/splunk stop"
-#  environment:
-#   SPLUNK_HOME: "{{ splunk_path  }}"
-#  tags: stop_splunk
