@@ -228,7 +228,7 @@
   tags:
    - create_inputs_fwd1_app
   
-  - name: reload deployment server
+- name: reload deployment server
   become: yes
   become_user: "{{ splunk_system_user }}"
   command: "{{ splunk_path  }}/bin/splunk reload deploy-server  -auth admin:{{ splunk_pass }}"
