@@ -63,7 +63,7 @@ case  "$1" in
        # ansible-vault decrypt  env/vars.yml 
      #   ansible-playbook site.yml --tag createuser,sshid  -l  forwarders
         ansible-playbook site.yml --tag sshid_fwds  -l  searchheads
-        ansible-playbook -v site.yml --tag forwarders_role --skip-tags stop_uf -l forwarders
+        ansible-playbook -v site.yml --tag forwarders_role --skip-tags set_fwd1_hostname,set_fwd2_hostname -l forwarders
         ansible-playbook -v site.yml --tag  setsplunk-hostname_fwd1 -l fwd1
         ansible-playbook -v site.yml --tag  set_fwd1_hostname -l fwd1
         ansible-playbook -v site.yml --tag  setsplunk-hostname_fwd2 -l fwd2
@@ -79,9 +79,11 @@ case  "$1" in
        # ansible-vault decrypt  env/vars.yml 
      #   ansible-playbook site.yml --tag createuser,sshid  -l  forwarders
         ansible-playbook site.yml --tag sshid_idxs  -l  searchheads
-        ansible-playbook -v site.yml --tag indexers_role --skip-tags stop_splunk -l indexers
+        ansible-playbook -v site.yml --tag indexers_role --skip-tags set_idx1_hostname,set_idx2_hostname  -l indexers
         ansible-playbook -v site.yml --tag  setsplunk-hostname_idx1 -l idx1
+        ansible-playbook -v site.yml --tag  set_idx1_hostname -l idx1
         ansible-playbook -v site.yml --tag  setsplunk-hostname_idx2 -l idx2
+        ansible-playbook -v site.yml --tag  set_idx2_hostname -l idx2
         # ansible-playbook -v site.yml --tag forwarders_role   --skip-tags set_password1,stop_uf  -l forwarders
       }
       setup_idxs
