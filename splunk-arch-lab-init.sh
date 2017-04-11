@@ -46,7 +46,7 @@ case  "$1" in
       setup_searchhead()
       {
         enable_virtualenv
-        ansible-playbook site.yml --tag searchhead_role --skip-tags add_indexer1,add_indexer2 -l  searchheads
+        ansible-playbook site.yml --tag searchhead_role --skip-tags add_indexers_to_sh -l  searchheads
       }
       setup_searchhead
       ;;
