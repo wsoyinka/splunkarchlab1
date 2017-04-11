@@ -1,2 +1,8 @@
 ---
 # handlers file for indexers
+
+- name: restart splunk
+  service: 
+    name: splunk 
+    state: restarted
+  become: yes
