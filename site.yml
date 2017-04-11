@@ -16,7 +16,7 @@
    - ./env/vars.yml
   roles:
    - { role: forwarders, tags: [ "forwarders_role" ] }
-   - { role: searchhead, tags: [ "test_role" ] }
+#   - { role: searchhead, tags: [ "test_role" ] }
 
 - hosts: indexers
   connection: smart
@@ -25,4 +25,4 @@
    - ./env/vars.yml
   roles:
    - { role: indexers, tags: [ "indexers_role" ] }
-   - { role: searchhead, tags: [ "test_role" ] }
+ #  - { role: searchhead, tags: [ "test_role" ] }
