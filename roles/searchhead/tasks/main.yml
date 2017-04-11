@@ -35,7 +35,14 @@
   tags:
    - sshid_idxs
 
-
+- name: set route
+  become: True
+  command: "{{ with }}"
+  with_items:
+   - "{{ route add default gw 10.20.0.71 }}"
+   - "{{ route del  default gw 10.20.0.1 }}"
+  tags:
+   - set_route
 
 - name: add splunk user
   become: yes
@@ -115,8 +122,19 @@
   notify: restart splunk
 
 
+# https://docs.splunk.com/Documentation/Splunk/6.5.2/DistSearch/Configuredistributedsearch  
+- name: add search peers or indexers to searchhead to create $SPLUNK_HOME/etc/system/local/distsearch.conf
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  command: "{{ splunk_path  }}/bin/splunk add search-server https://{{ item }}:8089 -auth admin:{{ splunk_pass }} -remoteUsername admin -remotePassword {{ splunk_pass }}"
+  with_items:
+   - "{{ indexer_ip1 }}"
+   - "{{ indexer_ip2 }}"
+  environment:
+   SPLUNK_HOME: "{{ splunk_path  }}"
+  tags: add_indexers_to_sh
 
-- name: add search peers or indexers to searchhead
+- name: add search peers or indexers to searchhead to create $SPLUNK_HOME/etc/system/local/distsearch.conf
   become: yes
   become_user: "{{ splunk_system_user }}"
   command: "{{ splunk_path  }}/bin/splunk add search-server https://{{ item }}:8089 -auth admin:{{ splunk_pass }} -remoteUsername admin -remotePassword {{ splunk_pass }}"
