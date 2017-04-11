@@ -97,9 +97,9 @@
 #    - configure_uf_d_cli
 
 
-- name: stop splunk service
-  become: yes
-  command: "{{ splunk_path  }}/bin/splunk stop"
-  environment:
-   SPLUNK_HOME: "{{ splunk_path  }}"
-  tags: stop_splunk
+#- name: stop splunk service
+#  become: yes
+#  command: "{{ splunk_path  }}/bin/splunk stop"
+#  environment:
+#   SPLUNK_HOME: "{{ splunk_path  }}"
+#  tags: stop_splunk
