@@ -60,6 +60,8 @@
 
 - name: download installer for splunk
   command: "wget -O {{ main_installer_dest  }} {{ main_installer_url }} "
+  args:
+   creates: "{{ main_installer_dest  }}"
   tags:
    - downloadmainwget
 
