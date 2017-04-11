@@ -5,13 +5,13 @@ localhost
 #10.0.14.1
 
 [indexers]
-idx1 ansible_host=10.10.0.229
-idx2 ansible_host=10.10.0.88
+idx1 ansible_host=10.10.0.44
+idx2 ansible_host=10.10.0.105
 #10.0.14.3
 
 [forwarders]
-fwd1 ansible_host=10.10.0.16
-fwd2  ansible_host=10.10.0.89
+fwd1 ansible_host=10.10.0.192
+fwd2  ansible_host=10.10.0.208
 
 
 [nonsearchheads:children]
