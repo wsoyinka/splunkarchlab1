@@ -10,6 +10,20 @@
    createhome: yes
   tags:
    - createuser
+     
+- name: set idx1 system hostname
+  become: yes
+  hostname:
+    name: idx1
+  tags:
+    - set_idx1_hostname
+    
+- name: set idx2 system hostname
+  become: yes
+  hostname:
+    name: idx2
+  tags:
+    - set_idx2_hostname
 
 - name: download installer for splunk
   command: "wget -O {{ main_installer_dest  }} {{ main_installer_url }} "
