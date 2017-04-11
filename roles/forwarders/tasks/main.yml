@@ -129,6 +129,14 @@
    SPLUNK_HOME: "{{ uf_path }}"
   tags:
    - configure_uf_outputs_cli
+   
+   
+- name:  show forwarded-server info on forwarders
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  command: "{{ uf_path }}/bin/splunk list forward-server  -auth {{ splunk_admin }}:{{ splunk_pass  }}"
+  tags:
+   - show_uf_outputs_cli
 
 #- name: template out outputs.conf
 #  become: yes
