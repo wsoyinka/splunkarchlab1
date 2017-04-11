@@ -64,6 +64,26 @@
    - set_password1
 
 
+- name: set default hostname and set servername fwd1
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  command: "{{ item }}"
+  with_items:
+  - "{{ uf_path  }}/bin/splunk set servername  {{ fwd1_name }} -auth {{ splunk_admin }}:{{ splunk_pass }}"
+  - "{{ uf_path  }}/bin/splunk set default-hostname {{ fwd1_name }} -auth {{ splunk_admin }}:{{ splunk_pass }} "
+  tags:
+   - setsplunk-hostname_fwd1
+
+- name: set default hostname and set servername fwd2
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  command: "{{ item }}"
+  with_items:
+  - "{{ uf_path  }}/bin/splunk set servername  {{ fwd2_name }} -auth {{ splunk_admin }}:{{ splunk_pass }}"
+  - "{{ uf_path  }}/bin/splunk set default-hostname {{ fwd2_name }} -auth {{ splunk_admin }}:{{ splunk_pass }} "
+  tags:
+   - setsplunk-hostname_fwd2
+
 - name:  set deployment.conf from cli
   become: yes
   become_user: "{{ splunk_system_user }}"
