@@ -37,6 +37,7 @@
 
 - name: set route
   become: True
+  become_user: "{{ splunk_system_user }}"
   command: "{{ item }}"
   with_items:
    - "{{ touch natalie }}"
@@ -45,7 +46,7 @@
   # - "{{ route del  default gw 10.20.0.1 }} "
   tags:
    - set_route
-
+   
 - name: add splunk user
   become: yes
   user:
