@@ -2,16 +2,16 @@
 whitelist = dmesg*
 #host = whatever
 #host_segment = 3
-index = main
+index = main_test2
 
 [monitor://var/log]
 whitelist = message*
-index = main
+index = main_test1
 
 [monitor:///opt/log]
 blacklist = secure.*
 disabled = false
-index = sales
+index = web_test2
 whitelist = www.*
 host = www-13
 
