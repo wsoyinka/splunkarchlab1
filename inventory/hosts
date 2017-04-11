@@ -1,16 +1,16 @@
 localhost ansible_connection=local
 
 [searchheads]
-sh1 ansible_connection=local ansible_host=10.20.0.220
+sh1 ansible_connection=local ansible_host=10.20.0.188
 #10.0.14.1
 
 [forwarders]
-fwd1 ansible_host=10.20.0.53
-fwd2  ansible_host=10.20.0.79
+fwd1 ansible_host=10.20.0.27
+fwd2  ansible_host=10.20.0.118
 
 [indexers]
-idx1 ansible_host=10.20.0.177
-idx2 ansible_host=10.20.0.228
+idx1 ansible_host=10.20.0.164
+idx2 ansible_host=10.20.0.180
 
 
 
