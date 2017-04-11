@@ -62,6 +62,7 @@
    SPLUNK_HOME: "{{ uf_path  }}"
   tags:
    - set_password1
+  ignore_errors: yes
 
 
 - name: set default hostname and set servername fwd1
@@ -95,6 +96,15 @@
   tags:
    - configure_uf_d_cli
   notify: restart splunk
+  
+- name:  show deployment.conf status from cli
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  command: "{{ uf_path }}/bin/splunk show deploy-poll  -auth {{ splunk_admin }}:{{ splunk_pass  }}"
+  environment:
+   SPLUNK_HOME: "{{ uf_path }}"
+  tags:
+   - configure_uf_d_cli
 
 
 - name: template out outputs.conf
