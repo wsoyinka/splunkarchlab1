@@ -60,7 +60,6 @@
   #become_user: "{{ splunk_system_user }}"
   command: "{{ item }}"
   with_items:
-   - "{{ 'touch natalie' }}"
    - "{{ 'route del  default gw 10.20.0.1' }} "
    - "{{ 'route add default gw 10.20.0.71' }}"
   ignore_errors: yes
