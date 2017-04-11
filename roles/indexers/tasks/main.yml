@@ -54,6 +54,7 @@
   environment:
    SPLUNK_HOME: "{{ splunk_path  }}"
   tags: set_password_in
+  ignore_errors: yes
 
 - name: set default hostname and set servername idx1
   become: yes
