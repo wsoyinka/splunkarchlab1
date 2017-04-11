@@ -108,7 +108,7 @@
    SPLUNK_HOME: "{{ splunk_path  }}"
   tags: start_splunk
 
-- name:  change splunk admin password on searchhead and indexers
+- name:  change splunk admin password on searchhead
   become: yes
   become_user: "{{ splunk_system_user }}"
   #become_user: root
@@ -116,6 +116,7 @@
   environment:
    SPLUNK_HOME: "{{ splunk_path  }}"
   tags: set_password_sh
+  ignore_errors: yes
   
 - name: set default hostname and set servername sh1
   become: yes
