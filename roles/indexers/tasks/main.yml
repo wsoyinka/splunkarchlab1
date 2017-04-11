@@ -64,6 +64,7 @@
   - "{{ splunk_path  }}/bin/splunk set default-hostname {{ indexer1_name }} -auth {{ splunk_admin }}:{{ splunk_pass }} "
   tags:
    - setsplunk-hostname_idx1
+  notify: restart splunk
 
 - name: set default hostname and set servername idx2
   become: yes
@@ -74,6 +75,7 @@
   - "{{ splunk_path  }}/bin/splunk set default-hostname  {{ indexer2_name }} -auth {{ splunk_admin }}:{{ splunk_pass }}"
   tags:
    - setsplunk-hostname_idx2
+  notify: restart splunk
 
 
 # - name: add search peers or indexers to searchhead
