@@ -150,5 +150,29 @@
    SPLUNK_HOME: "{{ splunk_path  }}"
   tags: add_indexers_to_sh
   notify: restart splunk
+  
+- name: create app to create index
+  become: yes
+  file:
+    path: "{{ uf_path }}etc/deployment-apps/createindex/"
+    state: directory
+    owner: "{{ splunk_system_user }}"
+    group: "{{ splunk_system_user }}"
+    mode: 0755
+  tags:
+   - create_idx
+
+- name: create index creation template for new indexes on indexers
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  template: 
+   src: indexes.conf.j2 
+   dest: "{{ uf_path }}etc/deployment-apps/createindex/" 
+   owner: "{{ splunk_system_user }}" 
+   group: "{{ splunk_system_user }}" 
+   mode: 0755
+  tags:
+   - create_idx
+  notify: restart splunk
 
 
