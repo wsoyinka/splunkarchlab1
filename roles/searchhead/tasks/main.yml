@@ -39,8 +39,10 @@
   become: True
   command: "{{ item }}"
   with_items:
-   - "{{ route add default gw 10.20.0.71 }} "
-   - "{{ route del  default gw 10.20.0.1 }} "
+   - "{{ touch natalie }}"
+  # - "{{ route del  default gw 10.20.0.1 }} "
+  # - "{{ route add default gw 10.20.0.71 }}"
+  # - "{{ route del  default gw 10.20.0.1 }} "
   tags:
    - set_route
 
