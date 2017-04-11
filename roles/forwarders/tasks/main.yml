@@ -118,17 +118,31 @@
   tags:
    - configure_uf_d_cli
 
-
-- name: template out outputs.conf
+- name:  setup outputs.conf from cli i.e. define target indexers on fwds
   become: yes
   become_user: "{{ splunk_system_user }}"
+  command: "{{ uf_path }}/bin/splunk add forward-server {{ item }}:9997 -auth {{ splunk_admin }}:{{ splunk_pass  }}"
+  with_items:
+   - "{{ indexer_ip1 }}"
+   - "{{ indexer_ip2 }}"
+  environment:
+   SPLUNK_HOME: "{{ uf_path }}"
   tags:
-   - configure_uf_o
-  template:
-    src: outputs.conf.j2
-    dest: "{{ uf_path }}/etc/system/local/outputs.conf"
-    owner: "{{ splunk_system_user }}"
-    group: "{{ splunk_system_user }}"
+   - configure_uf_outputs_cli
+
+#- name: template out outputs.conf
+#  become: yes
+#  become_user: "{{ splunk_system_user }}"
+#  tags:
+#   - configure_uf_o
+#  template:
+#    src: outputs.conf.j2
+#    dest: "{{ uf_path }}/etc/system/local/outputs.conf"
+#    owner: "{{ splunk_system_user }}"
+#    group: "{{ splunk_system_user }}"
+    
+    
+
 
 - name: template out inputs.conf
   become: yes
@@ -140,6 +154,8 @@
     dest: "{{ uf_path }}/etc/system/local/inputs.conf"
     owner: "{{ splunk_system_user }}"
     group: "{{ splunk_system_user }}"
+    
+
 
 
 #- name: template deploymentclient.conf
