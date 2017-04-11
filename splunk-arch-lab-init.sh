@@ -101,6 +101,17 @@ case  "$1" in
      }
      config_sh_2
      ;;
+   walkaway)
+     walkaway()
+     {
+       install_ansible_searchhead
+       setup_searchhead
+       setup_fwds
+       setup_idxs
+       config_sh_2
+     }
+    walkaway
+    ;;
    ping_sh)
       enable_virtualenv
       ansible all -m ping
@@ -114,7 +125,7 @@ case  "$1" in
       ansible  indexers -m ping
       ;;
     *)
-       echo $"Usage: $0 {install_ansible | setup_sh | setup_fwds | setup_idxs | ping_sh | ping_fwds| ping_idxs | config_sh_2 }"
+       echo $"Usage: $0 {install_ansible | setup_sh | setup_fwds | setup_idxs | ping_sh | ping_fwds| ping_idxs | config_sh_2 | walkaway }"
        exit 1
 esac
 
