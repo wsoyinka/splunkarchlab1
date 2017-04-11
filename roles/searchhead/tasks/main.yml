@@ -17,6 +17,14 @@
    key: "{{ lookup('file', '{{ splunklab_user_pub_home_path }}') }}"
   tags:
    - setauthkey
+   
+- name: set sh1 system hostname
+  become: yes
+  hostname:
+    name: sh1
+  tags:
+    - set_sh1_hostname
+
 
 - name: copy ssh key to forwarders 
   command: "ssh-copy-id   -o StrictHostKeyChecking=no -i {{ splunklab_user_pub_home_path }}  {{ splunklab_user }}@{{ item }} "
