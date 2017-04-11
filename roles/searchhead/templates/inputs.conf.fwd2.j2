@@ -1,0 +1,17 @@
+[monitor://var/log]
+whitelist = dmesg*
+#host = whatever
+#host_segment = 3
+index = main
+
+[monitor://var/log]
+whitelist = message*
+index = main
+
+[monitor:///opt/log]
+blacklist = secure.*
+disabled = false
+index = sales
+whitelist = www.*
+host = www-13
+
