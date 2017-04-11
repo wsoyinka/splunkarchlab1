@@ -73,6 +73,7 @@
   - "{{ uf_path  }}/bin/splunk set default-hostname {{ fwd1_name }} -auth {{ splunk_admin }}:{{ splunk_pass }} "
   tags:
    - setsplunk-hostname_fwd1
+  notify: restart splunk
 
 - name: set default hostname and set servername fwd2
   become: yes
@@ -83,6 +84,7 @@
   - "{{ uf_path  }}/bin/splunk set default-hostname {{ fwd2_name }} -auth {{ splunk_admin }}:{{ splunk_pass }} "
   tags:
    - setsplunk-hostname_fwd2
+  notify: restart splunk
 
 - name:  set deployment.conf from cli
   become: yes
@@ -92,16 +94,7 @@
    SPLUNK_HOME: "{{ uf_path }}"
   tags:
    - configure_uf_d_cli
-
-
-- name: stop splunk service
-  become: yes
-  become_user: "{{ splunk_system_user }}"
-  command: "{{ uf_path  }}/bin/splunk stop"
-  environment:
-   SPLUNK_HOME: "{{ uf_path }}"
-  tags:
-   - stop_uf
+  notify: restart splunk
 
 
 - name: template out outputs.conf
