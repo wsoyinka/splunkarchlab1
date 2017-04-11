@@ -129,7 +129,7 @@
   environment:
    SPLUNK_HOME: "{{ splunk_path }}"
   tags:
-   - configure_idx_d_cli 
+   - show_idx_d_cli 
   
   
  
