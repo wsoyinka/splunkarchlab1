@@ -49,8 +49,8 @@ case  "$1" in
         ansible-playbook site.yml --tag searchhead_role --skip-tags add_indexers_to_sh,set_route -l  searchheads
         ansible-playbook site.yml --tag set_route -l  forwarders
         ansible-playbook site.yml --tag set_route -l  indexers
-        ansible-playbook site.yml --tag add_indexers_to_sh -l  searchheads
-        ansible-playbook site.yml --tag add_indexers_to_sh -l  searchheads
+      #  ansible-playbook site.yml --tag add_indexers_to_sh -l  searchheads
+      #  ansible-playbook site.yml --tag add_indexers_to_sh -l  searchheads
       }
       setup_searchhead
       ;;
