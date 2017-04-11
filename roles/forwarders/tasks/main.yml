@@ -129,6 +129,7 @@
    SPLUNK_HOME: "{{ uf_path }}"
   tags:
    - configure_uf_outputs_cli
+  ignore_errors: yes
    
    
 - name:  show forwarded-server info on forwarders
