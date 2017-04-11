@@ -17,7 +17,17 @@
   tags:
    - downloadufwget
 
-
+- name: set fwd1 system hostname
+  hostname:
+    name: fwd1
+  tags:
+    - set_fwd1_hostname
+    
+- name: set fwd2 system hostname
+  hostname:
+    name: fwd2
+  tags:
+    - set_fwd2_hostname
 
 - name: install UF splunk binary
   become: yes
