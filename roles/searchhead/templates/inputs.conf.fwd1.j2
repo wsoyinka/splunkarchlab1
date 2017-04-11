@@ -1,11 +1,11 @@
-[monitor://var/log]
-whitelist = dmesg*
+[monitor://var/log/httpd]
+whitelist = access*
 #host = whatever
 #host_segment = 3
-index = main
+index = web
 
 [monitor://var/log]
-whitelist = message*
+whitelist = secure*
 index = main
 
 [monitor:///opt/log]
