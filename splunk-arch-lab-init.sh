@@ -47,7 +47,7 @@ case  "$1" in
       {
         enable_virtualenv
         ansible-vault decrypt  env/vars.yml --ask-vault-pass
-        ansible-playbook  site.yml --tag searchhead_role --skip-tags add_indexers_to_sh,set_route -l  searchheads
+        ansible-playbook  site.yml --tag searchhead_role --skip-tags add_indexers_to_sh,set_route,create_idx -l  searchheads
         #ansible-playbook  site.yml --ask-vault-pass --tag searchhead_role --skip-tags add_indexers_to_sh,set_route -l  searchheads
         ansible-playbook site.yml --tag set_route -l  forwarders
         ansible-playbook site.yml --tag set_route -l  indexers
@@ -92,8 +92,9 @@ case  "$1" in
      config_sh_2()
      {
         enable_virtualenv
-        ansible-vault decrypt  env/vars.yml --ask-vault-pass
+       # ansible-vault decrypt  env/vars.yml --ask-vault-pass
         ansible-playbook site.yml --tag add_indexers_to_sh -l  searchheads
+        ansible-playbook site.yml --tag create_idx -l  searchheads
 
      }
      config_sh_2
