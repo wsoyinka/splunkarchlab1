@@ -1,9 +1,18 @@
+[web]
+homePath   = $SPLUNK_DB/web/db
+coldPath   = $SPLUNK_DB/web/colddb
+thawedPath = $SPLUNK_DB/web/thaweddb
+maxDataSize = 3000
+maxTotalDataSizeMB = 60000
+coldToFrozenDir = /opt/frozen/web
+
 [web_test1]
 homePath   = $SPLUNK_DB/web_test1/db
 coldPath   = $SPLUNK_DB/web_test1/colddb
 thawedPath = $SPLUNK_DB/web_test1/thaweddb
 maxDataSize = 3000
 maxTotalDataSizeMB = 60000
+coldToFrozenDir = /opt/frozen/web
 
 [main_test1]
 homePath   = $SPLUNK_DB/main_test1/db
@@ -11,6 +20,7 @@ coldPath   = $SPLUNK_DB/main_test1/colddb
 thawedPath = $SPLUNK_DB/main_test1/thaweddb
 maxDataSize = 3000
 maxTotalDataSizeMB = 60000
+coldToFrozenDir = /opt/frozen/web
 
 [web_test2]
 homePath   = $SPLUNK_DB/web_test2/db
@@ -18,6 +28,7 @@ coldPath   = $SPLUNK_DB/web_test2/colddb
 thawedPath = $SPLUNK_DB/web_test2/thaweddb
 maxDataSize = 3000
 maxTotalDataSizeMB = 60000
+coldToFrozenDir = /opt/frozen/web
 
 [main_test2]
 homePath   = $SPLUNK_DB/main_test2/db
@@ -25,31 +36,5 @@ coldPath   = $SPLUNK_DB/main_test2/colddb
 thawedPath = $SPLUNK_DB/main_test2/thaweddb
 maxDataSize = 3000
 maxTotalDataSizeMB = 60000
-
-[test_uf1]
-coldPath = $SPLUNK_DB/test_uf1/colddb
-coldToFrozenDir = /opt/splunk/frozen/test_uf1
-enableDataIntegrityControl = 0
-enableTsidxReduction = 0
-homePath = $SPLUNK_DB/test_uf1/db
-maxDataSize = 3000
-maxTotalDataSizeMB = 60000
-thawedPath = $SPLUNK_DB/test_uf1/thaweddb
-
-[c2]
-coldPath = $SPLUNK_DB/c2/colddb
-enableDataIntegrityControl = 0
-enableTsidxReduction = 0
-homePath = $SPLUNK_DB/c2/db
-maxTotalDataSizeMB = 512000
-thawedPath = $SPLUNK_DB/c2/thaweddb
-
-[tutdata1_uf1]
-coldPath = $SPLUNK_DB/tutdata1_uf1/colddb
-enableDataIntegrityControl = 0
-enableTsidxReduction = 0
-homePath = $SPLUNK_DB/tutdata1_uf1/db
-maxTotalDataSizeMB = 512000
-thawedPath = $SPLUNK_DB/tutdata1_uf1/thaweddb
-
+coldToFrozenDir = /opt/frozen/web
 
