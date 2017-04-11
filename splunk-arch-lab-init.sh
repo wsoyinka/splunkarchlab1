@@ -30,7 +30,7 @@ install_ansible_searchhead()
   pip install --upgrade pip
   pwd
   pip -q install ansible
-  ansible -m ping   all
+  ansible -m ping   localhost
 }
 
 enable_virtualenv()
@@ -46,7 +46,9 @@ case  "$1" in
       setup_searchhead()
       {
         enable_virtualenv
-        ansible-playbook  site.yml --ask-vault-pass --tag searchhead_role --skip-tags add_indexers_to_sh,set_route -l  searchheads
+        ansible-vault decrypt  env/vars.yml --ask-vault-pass
+        ansible-playbook  site.yml --tag searchhead_role --skip-tags add_indexers_to_sh,set_route -l  searchheads
+        #ansible-playbook  site.yml --ask-vault-pass --tag searchhead_role --skip-tags add_indexers_to_sh,set_route -l  searchheads
         ansible-playbook site.yml --tag set_route -l  forwarders
         ansible-playbook site.yml --tag set_route -l  indexers
       #  ansible-playbook site.yml --tag add_indexers_to_sh -l  searchheads
