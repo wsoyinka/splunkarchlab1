@@ -130,24 +130,3 @@ case  "$1" in
 esac
 
 
-
-
-# ansible-playbook site.yml --tag downloadufwget,installuf   -l  forwarders
-#
-# ansible-playbook site.yml --tag set_root_dir,start_uf,start_uf_boot   -l  forwarders
-#
-# ansible-playbook site.yml --tag set_password1  -l  forwarders
-
-
-
-
-#ansible-playbook site.yml --tag configure_uf_d_cli   -l  forwarders
-
-###  searchhead
-
-#ansible-playbook site.yml --tag add_indexer1,add_indexer2  -l  searchhead
-
-
-#### INDEXERS
-
-#ansible-playbook site.yml --tag start_splunk,start_splunk_boot,set_root_dir,set_password_in  -l indexers
