@@ -162,6 +162,6 @@
   become: yes
   command: "mv {{ uf_path }}/diag-fwd1*   /home/{{ splunklab_user }}/SOYINKA-Forwarder.tar.gz"
   tags:
-   - run_diag
+   - run_diag2
    
     
