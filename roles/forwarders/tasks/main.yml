@@ -151,3 +151,17 @@
     owner: "{{ splunk_system_user }}"
     group: "{{ splunk_system_user }}"
     
+- name:  create diag on fwds
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  command: "{{ uf_path }}/bin/splunk diag  -auth {{ splunk_admin }}:{{ splunk_pass  }}"
+  tags:
+   - run_diag
+
+- name:  mv diag on fwds
+  become: yes
+  command: "mv {{ uf_path }}/diag-fwd1*   /home/{{ splunklab_user }}/SOYINKA-Forwarder.tar.gz"
+  tags:
+   - run_diag
+   
+    
