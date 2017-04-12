@@ -10,8 +10,8 @@
 - hosts: forwarders
   connection: smart
   gather_facts: yes
-  vars:
-   SPLUNK_HOME: "/opt/splunkforwarder/"
+#  vars:
+#   SPLUNK_HOME: "/opt/splunkforwarder/"
   vars_files:
    - ./env/vars.yml
   roles:
@@ -25,4 +25,12 @@
    - ./env/vars.yml
   roles:
    - { role: indexers, tags: [ "indexers_role" ] }
+   - { role: searchhead, tags: [ "test_role" ] }
+
+- hosts: nonsearchheads
+  connection: smart
+  gather_facts: yes
+  vars_files:
+   - ./env/vars.yml
+  roles:
    - { role: searchhead, tags: [ "test_role" ] }
