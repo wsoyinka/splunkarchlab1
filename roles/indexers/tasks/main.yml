@@ -155,4 +155,4 @@
   become: yes
   command: "mv {{ splunk_path }}/diag-idx*   /home/{{ splunklab_user }}/SOYINKA-Indexer.tar.gz"
   tags:
-   - run_diag 
+   - run_diag2
