@@ -12,11 +12,10 @@ set -o errexit
 ### setup virtualenv
 ## install ansible in the virtual env
 ## clone ws's remote git repo which creates and automates the setup of the splunk arch lab servers insfrastructure
-##  i.e. the searchhead server, the forwarders  and the indexers
+##  i.e. the searchhead, the forwarders  and the indexers
 ###   The roles have been created along the functions of each server.
 ##
-#### The env/vars.yml file contains splunk aws credentials and so it has been excluded or commented out of
-### publicly viewable git repo
+#### The env/vars.yml file contains sensitive credentials/info that has been encrypted before storing on this public git repo
 ###  The env/vars.yml file is an **importantant** component for this script to work.
 
 SPLUNKARCHLAB_BASE=splunkarchlab_base
