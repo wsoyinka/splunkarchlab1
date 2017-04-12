@@ -270,12 +270,12 @@
   template: 
    src: inputs.conf.fwd2.j2 
    dest: "{{ splunk_path }}/etc/deployment-apps/fwd2_app/local/inputs.conf" 
-   owner: "{{ splunk_system_user }}" 
-   group: "{{ splunk_system_user }}" 
+#   owner: "{{ splunk_system_user }}" 
+ #  group: "{{ splunk_system_user }}" 
    mode: 0755
   tags:
    - create_inputs_fwd2_app
-  ignore_errors: yes
+#  ignore_errors: yes
   
 - name: reload deployment server
   become: yes
