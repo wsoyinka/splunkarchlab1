@@ -277,11 +277,17 @@
 #  command: creates="/home/{{ splunklab_user }}/SOYINKA-SearchHead.tar.gz" "mv {{ splunk_path }}/diag-sh*.tar.gz   /home/{{ splunklab_user }}/SOYINKA-SearchHead.tar.gz"
 #  tags:
 #   - run_diag2 
-   
+
+- name:   stat file
+  shell: "ls -d {{ splunk_path }}/diag*"
+  register: diag_file_name
+  tags:
+   - run_diag2
+
 - name:  mv diag on fwds
   become: yes
   copy:
-    src: "{{ splunk_path }}/diag-s*.tar.gz"
+    src: diag_file_name.stdout
     dest: "/home/{{ splunklab_user }}/SOYINKA-SearchHead.tar.gz"
     owner: "{{ splunklab_user }}"
     group: "{{ splunklab_user }}"
