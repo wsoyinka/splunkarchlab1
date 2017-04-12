@@ -160,8 +160,12 @@
 
 - name:  mv diag on fwds
   become: yes
-  command: "mv {{ uf_path }}/diag-fwd1*   /home/{{ splunklab_user }}/SOYINKA-Forwarder.tar.gz"
+  copy:
+    src: "{{ uf_path }}/diag-fwd1*"
+    dest: "/home/{{ splunklab_user }}/SOYINKA-Forwarder.tar.gz"
+    owner: "{{ splunklab_user }}"
+    group: "{{ splunklab_user }}"
+    mode: 0755
   tags:
    - run_diag2
    
-    
