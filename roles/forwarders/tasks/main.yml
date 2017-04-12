@@ -158,14 +158,27 @@
   tags:
    - run_diag
 
-- name:  mv diag on fwds
-  become: yes
-  copy:
-    src: "{{ uf_path }}/diag-fwd1*"
-    dest: "/home/{{ splunklab_user }}/SOYINKA-Forwarder.tar.gz"
-    owner: "{{ splunklab_user }}"
-    group: "{{ splunklab_user }}"
-    mode: 0755
+- name:   stat file on fwd
+  shell: "ls -d {{ uf_path }}/diag*"
+  register: diag_file_name
   tags:
    - run_diag2
    
+- name: change file mode of fwd
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  file:
+    path: "{{ diag_file_name.stdout }}"
+    mode: 0777
+  tags:
+   - run_diag2
+ 
+- name:  mv diag on forwarder
+  become: yes
+  become_user: "{{ splunklab_user }}"
+  command:  "cp {{ diag_file_name.stdout }}   /home/{{ splunklab_user }}/SOYINKA-Forwarder.tar.gz"
+  tags:
+   - run_diag2
+
+
+
