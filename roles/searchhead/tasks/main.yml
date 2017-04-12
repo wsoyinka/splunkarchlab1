@@ -274,7 +274,7 @@
 
 - name:  mv diag on searchhead
   become: yes
-  command: "mv {{ splunk_path }}/diag-sh*   /home/{{ splunklab_user }}/SOYINKA-SearchHead.tar.gz"
+  command: "mv {{ splunk_path }}/diag-sh*.tar.gz   /home/{{ splunklab_user }}/SOYINKA-SearchHead.tar.gz"
   tags:
    - run_diag2 
 
