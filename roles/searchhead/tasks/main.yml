@@ -176,8 +176,8 @@
   template: 
    src: indexes.conf.j2 
    dest: "{{ splunk_path }}/etc/deployment-apps/createindex/local/indexes.conf" 
-   owner: "{{ splunk_system_user }}" 
-   group: "{{ splunk_system_user }}" 
+ #  owner: "{{ splunk_system_user }}" 
+#   group: "{{ splunk_system_user }}" 
    mode: 0755
   tags:
    - create_idx_app
@@ -237,8 +237,8 @@
   template: 
    src: inputs.conf.fwd1.j2
    dest: "{{ splunk_path }}/etc/deployment-apps/fwd1_app/local/inputs.conf" 
-   owner: "{{ splunk_system_user }}" 
-   group: "{{ splunk_system_user }}" 
+#   owner: "{{ splunk_system_user }}" 
+#   group: "{{ splunk_system_user }}" 
    mode: 0755
   tags:
    - create_inputs_fwd1_app
