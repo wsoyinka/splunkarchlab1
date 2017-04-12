@@ -151,7 +151,7 @@
   tags:
    - run_diag
 
- name:   stat file idxs
+- name:   stat file idxs
   shell: "ls -d {{ splunk_path }}/diag*"
   register: diag_file_name
   tags:
