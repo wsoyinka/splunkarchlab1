@@ -1,17 +1,21 @@
-[monitor://var/log]
-whitelist = dmesg*
-#host = whatever
-#host_segment = 3
+[monitor:///opt/log/cisco_router1/cisco_ironport_web.log]
+#blacklist = secure.*
+disabled = false
+index = main_test2
+#whitelist = *
+host = cisco_router1
+
+
+[monitor:///opt/log/crashlog/dreamcrusher.xml]
+disabled = false
+host = game_server1
 index = main_test2
 
-[monitor://var/log]
-whitelist = message*
-index = main_test1
+#[monitor:///opt/log/www*/secure.log]
+#blacklist = access.*
+#disabled = false
+#index = main_test2
+#whitelist = secure.*
+#host_segment = 3
 
-[monitor:///opt/log]
-blacklist = secure.*
-disabled = false
-index = web_test2
-whitelist = www.*
-host = www-13
 
