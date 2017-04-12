@@ -272,9 +272,21 @@
   tags:
    - run_diag
 
-- name:  mv diag on searchhead
+#- name:  mv diag on searchhead
+#  become: yes
+#  command: creates="/home/{{ splunklab_user }}/SOYINKA-SearchHead.tar.gz" "mv {{ splunk_path }}/diag-sh*.tar.gz   /home/{{ splunklab_user }}/SOYINKA-SearchHead.tar.gz"
+#  tags:
+#   - run_diag2 
+   
+- name:  mv diag on fwds
   become: yes
-  command: creates="/home/{{ splunklab_user }}/SOYINKA-SearchHead.tar.gz" "mv {{ splunk_path }}/diag-sh*.tar.gz   /home/{{ splunklab_user }}/SOYINKA-SearchHead.tar.gz"
+  copy:
+    src: "{{ splunk_path }}/diag-fwd1*"
+    dest: "/home/{{ splunklab_user }}/SOYINKA-Forwarder.tar.gz"
+    owner: "{{ splunklab_user }}"
+    group: "{{ splunklab_user }}"
+    mode: 0755
   tags:
-   - run_diag2 
+   - run_diag2
+
 
