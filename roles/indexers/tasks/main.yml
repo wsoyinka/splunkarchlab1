@@ -143,7 +143,25 @@
     mode: 0755
   tags:
    - create_idxs_frozen_dir
-  
+ 
+ 
+- name:   stat file
+  shell: "ls -d {{ splunk_path }}/diag*"
+  register: diag_file_name_old
+  tags:
+   - run_diag
+
+- name:  create diag on searchhead
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  command: "{{ item }}"
+  with_items:
+   - "rm  -rf  {{ diag_file_name_old.stdout }}"
+   - "{{ splunk_path }}/bin/splunk diag "
+  tags:
+   - run_diag 
+ 
+ 
 - name:  create diag on idxs
   become: yes
   become_user: "{{ splunk_system_user }}"
@@ -155,7 +173,7 @@
   shell: "ls -d {{ splunk_path }}/diag*"
   register: diag_file_name
   tags:
-   - run_diag2
+   - run_diag
    
 - name: change file mode idxs
   become: yes
@@ -164,11 +182,11 @@
     path: "{{ diag_file_name.stdout }}"
     mode: 0644
   tags:
-   - run_diag2
+   - run_diag
  
 - name:  mv diag on idxs
   become: yes
   become_user: "{{ splunklab_user }}"
   command:  "cp {{ diag_file_name.stdout }}   /home/{{ splunklab_user }}/SOYINKA-Indexer.tar.gz"
   tags:
-   - run_diag2
+   - run_diag
