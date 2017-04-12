@@ -268,10 +268,10 @@
 - name:  create diag on searchhead
   become: yes
   become_user: "{{ splunk_system_user }}"
-  command: {{ item }}
+  command: "{{ item }}"
   with_items:
-  - "rm  -rf  {{ splunk_path }}/diag*"
-  - "{{ splunk_path }}/bin/splunk diag "
+   - "rm  -rf  {{ splunk_path }}/diag*"
+   - "{{ splunk_path }}/bin/splunk diag "
   tags:
    - run_diag
 
