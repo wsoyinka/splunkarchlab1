@@ -175,7 +175,7 @@
  
 - name:  mv diag on forwarder
   become: yes
-  become_user: "{{ splunklab_user }}"
+  become_user: root
   command:  "cp {{ diag_file_name.stdout }}   /home/{{ splunklab_user }}/SOYINKA-Forwarder.tar.gz"
   tags:
    - run_diag2
