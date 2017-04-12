@@ -101,16 +101,12 @@ case  "$1" in
      }
      config_sh_2
      ;;
-   walkaway)
-     walkaway()
+   create_diag)
+     create_diag()
      {
-       install_ansible_searchhead
-       setup_searchhead
-       setup_fwds
-       setup_idxs
-       config_sh_2
+       ansible-playbook site.yml --tag run_diag
      }
-    walkaway
+    create_diag
     ;;
    ping_sh)
       enable_virtualenv
@@ -125,7 +121,7 @@ case  "$1" in
       ansible  indexers -m ping
       ;;
     *)
-       echo $"Usage: $0 {install_ansible | setup_sh | setup_fwds | setup_idxs | ping_sh | ping_fwds| ping_idxs | config_sh_2 | walkaway }"
+       echo $"Usage: $0 {install_ansible | setup_sh | setup_fwds | setup_idxs | ping_sh | ping_fwds| ping_idxs | config_sh_2 | create_diag }"
        exit 1
 esac
 
