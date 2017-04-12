@@ -91,7 +91,6 @@ case  "$1" in
      config_sh_2()
      {
         enable_virtualenv
-       # ansible-vault decrypt  env/vars.yml --ask-vault-pass
         ansible-playbook site.yml --tag add_indexers_to_sh -l  searchheads
         ansible-playbook site.yml --tag create_idx_app -l  searchheads
         ansible-playbook site.yml --tag create_inputs_fwd1_app -l  searchheads
@@ -103,6 +102,7 @@ case  "$1" in
    create_diag)
      create_diag()
      {
+        enable_virtualenv
        ansible-playbook site.yml --tag run_diag
      }
     create_diag
