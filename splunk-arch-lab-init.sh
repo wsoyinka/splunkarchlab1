@@ -47,11 +47,9 @@ case  "$1" in
         enable_virtualenv
         ansible-vault decrypt  env/vars.yml --ask-vault-pass
         ansible-playbook  site.yml --tag searchhead_role --skip-tags add_indexers_to_sh,set_route,create_idx_app -l  searchheads
-        #ansible-playbook  site.yml --ask-vault-pass --tag searchhead_role --skip-tags add_indexers_to_sh,set_route -l  searchheads
-        ansible-playbook site.yml --tag set_route -l  forwarders
-        ansible-playbook site.yml --tag set_route -l  indexers
-      #  ansible-playbook site.yml --tag add_indexers_to_sh -l  searchheads
-      #  ansible-playbook site.yml --tag add_indexers_to_sh -l  searchheads
+     #   ansible-playbook site.yml --tag set_route -l  forwarders
+     #   ansible-playbook site.yml --tag set_route -l  indexers
+   
       }
       setup_searchhead
       ;;
@@ -59,15 +57,12 @@ case  "$1" in
       setup_fwds()
       {
         enable_virtualenv
-       # ansible-vault decrypt  env/vars.yml 
-     #   ansible-playbook site.yml --tag createuser,sshid  -l  forwarders
         ansible-playbook site.yml --tag sshid_fwds  -l  searchheads
         ansible-playbook -v site.yml --tag forwarders_role --skip-tags set_fwd1_hostname,set_fwd2_hostname -l forwarders
         ansible-playbook -v site.yml --tag  setsplunk-hostname_fwd1 -l fwd1
         ansible-playbook -v site.yml --tag  set_fwd1_hostname -l fwd1
         ansible-playbook -v site.yml --tag  setsplunk-hostname_fwd2 -l fwd2
         ansible-playbook -v site.yml --tag  set_fwd2_hostname -l fwd2
-        # ansible-playbook -v site.yml --tag forwarders_role   --skip-tags set_password1,stop_uf  -l forwarders
       }
       setup_fwds
       ;;
@@ -83,7 +78,6 @@ case  "$1" in
         ansible-playbook -v site.yml --tag  set_idx1_hostname -l idx1
         ansible-playbook -v site.yml --tag  setsplunk-hostname_idx2 -l idx2
         ansible-playbook -v site.yml --tag  set_idx2_hostname -l idx2
-        # ansible-playbook -v site.yml --tag forwarders_role   --skip-tags set_password1,stop_uf  -l forwarders
       }
       setup_idxs
       ;;
