@@ -160,14 +160,6 @@
    - "{{ splunk_path }}/bin/splunk diag "
   tags:
    - run_diag 
- 
- 
-- name:  create diag on idxs
-  become: yes
-  become_user: "{{ splunk_system_user }}"
-  command: "{{ splunk_path }}/bin/splunk diag "
-  tags:
-   - run_diag
 
 - name:   stat file idxs
   shell: "ls -d {{ splunk_path }}/diag*"
