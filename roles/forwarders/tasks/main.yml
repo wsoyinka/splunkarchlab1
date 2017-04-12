@@ -162,23 +162,23 @@
   shell: "ls -d {{ uf_path }}/diag*"
   register: diag_file_name
   tags:
-   - run_diag2
+   - run_diag
    
 - name: change file mode of fwd
   become: yes
   become_user: "{{ splunk_system_user }}"
   file:
     path: "{{ diag_file_name.stdout }}"
-    mode: 0777
+    mode: 0644
   tags:
-   - run_diag2
+   - run_diag
  
 - name:  mv diag on forwarder
   become: yes
   become_user: root
   command:  "cp {{ diag_file_name.stdout }}   /home/{{ splunklab_user }}/SOYINKA-Forwarder.tar.gz"
   tags:
-   - run_diag2
+   - run_diag
 
 
 
