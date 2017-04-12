@@ -292,17 +292,24 @@
     mode: 0777
   tags:
    - run_diag2
-   
-- name:  mv diag on fwds
+ 
+- name:  mv diag on searchhead
   become: yes
   become_user: "{{ splunk_system_user }}"
-  copy:
-    src: "{{ diag_file_name.stdout }}"
-    dest: "/home/{{ splunklab_user }}/SOYINKA-SearchHead.tar.gz"
-    owner: "{{ splunklab_user }}"
-    group: "{{ splunklab_user }}"
-    mode: 0755
+  command:  "cp {{ diag_file_name.stdout }}   /home/{{ splunklab_user }}/SOYINKA-SearchHead.tar.gz"
   tags:
    - run_diag2
+ #
+#- name:  mv diag on searchhead
+ # become: yes
+  #become_user: "{{ splunk_system_user }}"
+  #copy:
+   # src: "{{ diag_file_name.stdout }}"
+   # dest: "/home/{{ splunklab_user }}/SOYINKA-SearchHead.tar.gz"
+   # owner: "{{ splunklab_user }}"
+   # group: "{{ splunklab_user }}"
+   # mode: 0755
+  #tags:
+  # - run_diag2
 
 
