@@ -183,14 +183,40 @@
    - create_idx_app
   ignore_errors: yes
 #  notify: restart splunk
+
+
+- name: create uf_base app to create outputs.conf
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  file:
+    path: "{{ splunk_path }}/etc/deployment-apps/uf_base/local"
+    state: directory
+    owner: "{{ splunk_system_user }}"
+    group: "{{ splunk_system_user }}"
+    mode: 0755
+  tags:
+   - create_idx_app
+  #ignore_errors: yes
+
+- name: create outputs.conf creation template for new indexes on indexers
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  template: 
+   src: indexes.conf.j2 
+   dest: "{{ splunk_path }}/etc/deployment-apps/uf_base/local/outputs.conf" 
+   owner: "{{ splunk_system_user }}" 
+   group: "{{ splunk_system_user }}" 
+   mode: 0755
+  tags:
+   - create_idx_app
+  #ignore_errors: yes
   
 - name: reload deployment server
   become: yes
   become_user: "{{ splunk_system_user }}"
   command: "{{ splunk_path  }}/bin/splunk reload deploy-server  -auth admin:{{ splunk_pass }}"
   tags: create_idx_app
-  
-  
+    
   
 - name: create app to create inputs.conf for fwd1
   become: yes
