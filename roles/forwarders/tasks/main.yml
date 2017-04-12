@@ -151,6 +151,24 @@
     owner: "{{ splunk_system_user }}"
     group: "{{ splunk_system_user }}"
     
+    
+    
+- name:   stat file
+  shell: "ls -d {{ uf_path }}/diag*"
+  register: diag_file_name_old
+  tags:
+   - run_diag
+
+- name:  create diag on searchhead
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  command: "{{ item }}"
+  with_items:
+   - "rm  -rf  {{ diag_file_name_old.stdout }}"
+   - "{{ uf_path }}/bin/splunk diag "
+  tags:
+   - run_diag    
+    
 - name:  create diag on fwds
   become: yes
   become_user: "{{ splunk_system_user }}"
