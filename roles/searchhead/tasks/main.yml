@@ -283,10 +283,19 @@
   register: diag_file_name
   tags:
    - run_diag2
-
+   
+- name: change file mode
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  file:
+    path: "{{ diag_file_name.stdout }}"
+    mode: 0777
+  tags:
+   - run_diag2
+   
 - name:  mv diag on fwds
   become: yes
-  become_user: root
+  become_user: "{{ splunk_system_user }}"
   copy:
     src: "{{ diag_file_name.stdout }}"
     dest: "/home/{{ splunklab_user }}/SOYINKA-SearchHead.tar.gz"
