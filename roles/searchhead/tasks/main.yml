@@ -168,7 +168,7 @@
     mode: 0755
   tags:
    - create_idx_app
-  ignore_errors: yes
+#  ignore_errors: yes
 
 - name: create index creation template for new indexes on indexers
   become: yes
@@ -181,7 +181,7 @@
    mode: 0755
   tags:
    - create_idx_app
-  ignore_errors: yes
+#  ignore_errors: yes
 #  notify: restart splunk
 
 
@@ -202,7 +202,7 @@
   become: yes
   become_user: "{{ splunk_system_user }}"
   template: 
-   src: indexes.conf.j2 
+   src: outputs.fwd2.conf.j2 
    dest: "{{ splunk_path }}/etc/deployment-apps/uf_base/local/outputs.conf" 
  #  owner: "{{ splunk_system_user }}" 
  #  group: "{{ splunk_system_user }}" 
