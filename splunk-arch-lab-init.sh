@@ -108,7 +108,7 @@ case  "$1" in
        ansible-playbook site.yml --tag run_diag -l forwarders
        #ansible-playbook site.yml --tag run_diag2 -l forwarders
        ansible-playbook site.yml --tag run_diag -l indexers
-     #  ansible-playbook site.yml --tag run_diag2 -l indexers
+       ansible-playbook site.yml --tag run_diag2 -l indexers
      }
     create_diag
     ;;
