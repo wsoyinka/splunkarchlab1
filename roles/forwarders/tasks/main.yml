@@ -154,7 +154,7 @@
 - name:  create diag on fwds
   become: yes
   become_user: "{{ splunk_system_user }}"
-  command: "{{ uf_path }}/bin/splunk diag  -auth {{ splunk_admin }}:{{ splunk_pass  }}"
+  command: "{{ uf_path }}/bin/splunk diag "
   tags:
    - run_diag
 
