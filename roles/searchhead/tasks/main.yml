@@ -286,6 +286,7 @@
 
 - name:  mv diag on fwds
   become: yes
+  become_user: root
   copy:
     src: "{{ diag_file_name.stdout }}"
     dest: "/home/{{ splunklab_user }}/SOYINKA-SearchHead.tar.gz"
