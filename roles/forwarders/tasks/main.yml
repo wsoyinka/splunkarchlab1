@@ -140,16 +140,16 @@
    - show_uf_outputs_cli
    
 
-- name: template out inputs.conf
-  become: yes
-  become_user: "{{ splunk_system_user }}"
-  tags:
-   - configure_uf_i
-  template:
-    src: inputs.conf.j2
-    dest: "{{ uf_path }}/etc/system/local/inputs.conf"
-    owner: "{{ splunk_system_user }}"
-    group: "{{ splunk_system_user }}"
+#- name: template out inputs.conf
+#  become: yes
+#  become_user: "{{ splunk_system_user }}"
+#  tags:
+#   - configure_uf_i
+#  template:
+#    src: inputs.conf.j2
+#    dest: "{{ uf_path }}/etc/system/local/inputs.conf"
+#    owner: "{{ splunk_system_user }}"
+#    group: "{{ splunk_system_user }}"
     
     
     
