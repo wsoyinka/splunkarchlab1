@@ -25,7 +25,7 @@
    - ./env/vars.yml
   roles:
    - { role: indexers, tags: [ "indexers_role" ] }
-   - { role: searchhead, tags: [ "test_role" ] }
+#   - { role: searchhead, tags: [ "test_role" ] }
 
 - hosts: nonsearchheads
   connection: smart
@@ -33,4 +33,4 @@
   vars_files:
    - ./env/vars.yml
   roles:
-   - { role: searchhead, tags: [ "test_role" ] }
+ #  - { role: searchhead, tags: [ "test_role" ] }
