@@ -55,16 +55,15 @@
   tags:
    - sshid_idxs
 
-- name: set route
-  become: yes
-  #become_user: "{{ splunk_system_user }}"
-  command: "{{ item }}"
-  with_items:
-   - "{{ 'route del  default gw 10.20.0.1' }} "
-   - "{{ 'route add default gw 10.20.0.71' }}"
-  ignore_errors: yes
-  tags:
-   - set_route
+#- name: set route
+#  become: yes
+#  command: "{{ item }}"
+#  with_items:
+#   - "{{ 'route del  default gw 10.20.0.1' }} "
+#   - "{{ 'route add default gw 10.20.0.71' }}"
+#  ignore_errors: yes
+#  tags:
+#   - set_route
    
 
    
@@ -84,18 +83,6 @@
    creates: "{{ main_installer_dest  }}"
   tags:
    - downloadmainwget
-
-
-
-# - name: download installer for splunk
-#   get_url:
-#    url: '{{ main_installer_url }}'
-#    dest: '{{ main_installer_dest  }}'
-#    validate_certs: no
-#   tags:
-#    - downloadmain
-
-
 
 - name: install Main splunk binary
   become: yes
