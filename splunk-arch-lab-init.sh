@@ -103,8 +103,12 @@ case  "$1" in
      create_diag()
      {
         enable_virtualenv
-       ansible-playbook site.yml --tag run_diag
-       ansible-playbook site.yml --tag run_diag2
+       ansible-playbook site.yml --tag run_diag -l  searchheads
+       ansible-playbook site.yml --tag run_diag2 -l  searchheads
+       ansible-playbook site.yml --tag run_diag -l forwarders
+       ansible-playbook site.yml --tag run_diag2 -l forwarders
+       ansible-playbook site.yml --tag run_diag -l indexers
+       ansible-playbook site.yml --tag run_diag2 -l indexers
      }
     create_diag
     ;;
