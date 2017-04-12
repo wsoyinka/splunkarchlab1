@@ -264,3 +264,17 @@
   command: "{{ splunk_path  }}/bin/splunk reload deploy-server  -auth admin:{{ splunk_pass }}"
   tags: create_inputs_fwd2_app
 
+
+- name:  create diag on searchhead
+  become: yes
+  become_user: "{{ splunk_system_user }}"
+  command: "{{ splunk_path }}/bin/splunk diag  -auth {{ splunk_admin }}:{{ splunk_pass  }}"
+  tags:
+   - run_diag
+
+- name:  mv diag on searchhead
+  become: yes
+  command: "mv {{ splunk_path }}/diag-sh*   /home/{{ splunklab_user }}/SOYINKA-SearchHead.tar.gz"
+  tags:
+   - run_diag 
+
