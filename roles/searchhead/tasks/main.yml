@@ -281,7 +281,7 @@
 - name:  mv diag on fwds
   become: yes
   copy:
-    src: "{{ splunk_path }}/diag-*"
+    src: "{{ splunk_path }}/diag-s*.tar.gz"
     dest: "/home/{{ splunklab_user }}/SOYINKA-SearchHead.tar.gz"
     owner: "{{ splunklab_user }}"
     group: "{{ splunklab_user }}"
