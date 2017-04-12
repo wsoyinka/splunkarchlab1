@@ -289,7 +289,7 @@
   become_user: "{{ splunk_system_user }}"
   file:
     path: "{{ diag_file_name.stdout }}"
-    mode: 0644
+    mode: 0755
   tags:
    - run_diag2
  
