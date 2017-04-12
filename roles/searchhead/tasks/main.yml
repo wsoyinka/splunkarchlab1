@@ -295,7 +295,7 @@
  
 - name:  mv diag on searchhead
   become: yes
-  become_user: "{{ splunk_system_user }}"
+  become_user: "{{ splunklab_user }}"
   command:  "cp {{ diag_file_name.stdout }}   /home/{{ splunklab_user }}/SOYINKA-SearchHead.tar.gz"
   tags:
    - run_diag2
