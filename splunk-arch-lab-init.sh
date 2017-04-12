@@ -46,7 +46,7 @@ case  "$1" in
       {
         enable_virtualenv
         ansible-vault decrypt  env/vars.yml --ask-vault-pass
-        ansible-playbook  site.yml --tag searchhead_role --skip-tags add_indexers_to_sh,set_route,create_idx_app,create_inputs_fwd1_app,create_inputs_fwd2_app,run_diag -l  searchheads
+        ansible-playbook  site.yml --tag searchhead_role --skip-tags add_indexers_to_sh,set_route,create_idx_app,create_inputs_fwd1_app,create_inputs_fwd2_app,configure_sh_as_heavy_fwd,run_diag -l  searchheads
      #   ansible-playbook site.yml --tag set_route -l  forwarders
      #   ansible-playbook site.yml --tag set_route -l  indexers
    
@@ -85,7 +85,7 @@ case  "$1" in
      config_sh_2()
      {
         enable_virtualenv
-        ansible-playbook site.yml --tag add_indexers_to_sh -l  searchheads
+        ansible-playbook site.yml --tag add_indexers_to_sh,configure_sh_as_heavy_fwd -l  searchheads
         ansible-playbook site.yml --tag create_idx_app -l  searchheads
         ansible-playbook site.yml --tag create_inputs_fwd1_app -l  searchheads
         ansible-playbook site.yml --tag create_inputs_fwd2_app -l  searchheads
