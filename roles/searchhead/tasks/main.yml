@@ -168,6 +168,7 @@
     mode: 0755
   tags:
    - create_idx_app
+  ignore_errors: yes
 
 - name: create index creation template for new indexes on indexers
   become: yes
