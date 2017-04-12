@@ -276,5 +276,5 @@
   become: yes
   command: "mv {{ splunk_path }}/diag-sh*   /home/{{ splunklab_user }}/SOYINKA-SearchHead.tar.gz"
   tags:
-   - run_diag 
+   - run_diag2 
 
