@@ -312,6 +312,7 @@
   register: diag_file_name_old
   tags:
    - run_diag
+  ignore_errors: yes
 
 - name:  create diag on searchhead
   become: yes
