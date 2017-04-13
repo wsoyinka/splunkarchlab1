@@ -101,6 +101,7 @@
   tags:
    - configure_idx_d_cli
   notify: restart splunk
+  ignore_errors: yes
   
   
 - name:  show deployment.conf status from cli
