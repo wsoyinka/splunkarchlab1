@@ -66,6 +66,18 @@ case  "$1" in
       }
       setup_fwds
       ;;
+      
+   setup_fwds_subset)
+     setup_fwds_subset()
+     {
+       enable_virtualenv
+       ansible-playbook site.yml --tag sshid_fwds  -l  searchheads
+       ansible-playbook -v site.yml --tag createuser,downloadufwget,set_fwd1_hostname,installuf,start_uf,start_uf_boot,set_password1,setsplunk-hostname_fwd1,configure_uf_d_cli -l fwd1
+       ansible-playbook -v site.yml --tag createuser,downloadufwget,set_fwd2_hostname,installuf,start_uf,start_uf_boot,set_password1,setsplunk-hostname_fwd2,configure_uf_d_cli -l fwd2
+        
+     }
+      setup_fwds_subset
+     ;;
    setup_idxs)
       setup_idxs()
       {
@@ -117,7 +129,7 @@ case  "$1" in
       ansible  indexers -m ping
       ;;
     *)
-       echo $"Usage: $0 {install_ansible | setup_sh | setup_fwds | setup_idxs | ping_sh | ping_fwds| ping_idxs | config_sh_2 | create_diag }"
+       echo $"Usage: $0 {install_ansible | setup_sh | setup_fwds | setup_idxs | ping_sh | ping_fwds| ping_idxs | config_sh_2 | setup_fwds_subset | create_diag }"
        exit 1
 esac
 
