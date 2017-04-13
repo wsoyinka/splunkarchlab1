@@ -136,7 +136,7 @@
 - name: create frozen dir on idxs
   become: yes
   file:
-    path: "/opt/frozen"
+    path: "/opt/frozen/web"
     state: directory
     owner: "{{ splunk_system_user }}"
     group: "{{ splunk_system_user }}"
